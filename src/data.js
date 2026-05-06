@@ -79,7 +79,7 @@ export const ccaaRows = [
   },
   {
     ccaa: "Asturias",
-    source: "SIMEG + SIMPA",
+    source: "SIMEG",
     base: [1387, 1498, 1637, 1776, 1914],
     withGuardsGross: [2783, 3084, 3414, 3743, 3881],
     withGuardsNet: [2089, 2285, 2484, 2677, 2757],
@@ -163,7 +163,7 @@ export const ccaaRows = [
   },
   {
     ccaa: "Cataluña",
-    source: "SIMEG + ICS",
+    source: "SIMEG",
     base: [1504, 1618, 1757, 1897, 2044],
     withGuardsGross: [3066, 3492, 3943, 4237, 4385],
     withGuardsNet: [2279, 2542, 2810, 2982, 3065],
@@ -261,7 +261,7 @@ export const ccaaRows = [
   },
   {
     ccaa: "Navarra",
-    source: "SIMEG + SM Navarra",
+    source: "SIMEG",
     base: [1387, 1498, 1637, 1776, 1914],
     withGuardsGross: [2938, 3306, 3703, 4052, 4190],
     withGuardsNet: [2192, 2404, 2615, 2861, 2875],
@@ -329,7 +329,7 @@ export const estatutoIssues = [
     title: "Falacia 6: los descansos quedan plenamente protegidos",
     claim: "La libranza postguardia queda regulada.",
     answer:
-      "El texto habla de jornada realizada a efectos administrativos, pero no siempre de tiempo efectivo de trabajo. También prevé descansos alternativos y suspensiones excepcionales. La reivindicación médica es descanso efectivo y computable, sin trucos organizativos.",
+      "El texto habla de jornada realizada a efectos administrativos, pero no siempre de tiempo efectivo de trabajo. También prevé descansos alternativos y suspensiones excepcionales. La reivindicación médica es descanso efectivo y computable, sin ambigüedad organizativa.",
     refs: ["Anteproyecto art. 89-91 y 99", "Foro Profesión Médica 2025"],
   },
   {
@@ -357,7 +357,7 @@ export const estatutoIssues = [
     title: "Falacia 10: la movilidad solo mejora concursos voluntarios",
     claim: "El concurso abierto y permanente mejora la movilidad.",
     answer:
-      "Puede mejorar la movilidad voluntaria, pero el texto conserva supuestos de movilidad por necesidad asistencial. La profesión reclama garantías contra desplazamientos forzosos usados para tapar déficits estructurales.",
+      "Puede mejorar la movilidad voluntaria, pero el texto conserva supuestos de movilidad por necesidad asistencial. La profesión reclama garantías frente a desplazamientos forzosos derivados de necesidades organizativas.",
     refs: ["Anteproyecto art. 54-55", "FAQ Ministerio movilidad"],
   },
 ];
@@ -380,12 +380,36 @@ export const sources = [
     url: "https://www.cesm.org/2026/04/08/el-comite-de-huelga-denuncia-que-el-ministerio-entorpece-la-negociacion-para-esconder-su-incapacidad-para-llegar-a-acuerdos-que-atiendan-las-reivindicaciones-del-colectivo/",
   },
   {
+    label: "Comité de Huelga - Contrapropuesta 21/04/2026",
+    url: "https://www.cesm.org/wp-content/uploads/2026/04/20260420-Contrapropuesta-comite-huelga-APL-Estatuto-Marco.pdf",
+  },
+  {
     label: "CESM - Convocatoria de huelga nacional",
     url: "https://www.cesm.org/2026/01/22/el-comite-de-huelga-convoca-un-paro-indefinido-a-partir-del-proximo-16-de-febrero-para-conseguir-un-estatuto-medico-y-facultativo/",
   },
   {
+    label: "CESM - Reivindicaciones del Comité de Huelga",
+    url: "https://www.cesm.org/2025/06/09/estas-son-las-reivindicaciones-del-comite-de-huelga-ante-el-ministerio-de-sanidad/",
+  },
+  {
+    label: "Ministerio de Sanidad - FAQ Estatuto Marco",
+    url: "https://www.sanidad.gob.es/areas/profesionesSanitarias/PregFrecEstatutoMarco.htm",
+  },
+  {
     label: "SATSE - Acuerdo con Sanidad",
     url: "https://www.satse.es/notas-prensa/-/v/85301/acuerdo-inicio-tramitacion-estatuto-marco",
+  },
+  {
+    label: "Foro de la Profesión Médica - Reivindicaciones 2025",
+    url: "https://www.medicosypacientes.com/articulo/el-foro-de-la-profesion-medica-defiende-las-reivindicaciones-que-han-llevado-a-la-huelga-del-13-de-junio/",
+  },
+  {
+    label: "CESM-CV - Líneas rojas del Estatuto Marco",
+    url: "https://www.cesm-cv.org/reclasificacion-profesional-jornada-laboral-y-regimen-de-incompatibilidades-lineas-rojas-del-borrador-de-estatuto-marco/",
+  },
+  {
+    label: "Metges de Catalunya - Preacuerdo y huelga facultativa",
+    url: "https://metgesdecatalunya.cat/es/actualidad/noticias/el-preacuerdo-entre-sanidad-y-los-sindicatos-del-ambito-de-negociacion-para-renovar-el-estatuto-marco-no-suspende-la-huelga-de-facultativos",
   },
   {
     label: "Aragón SALUD - Tablas retributivas 2026",
@@ -398,6 +422,18 @@ export const sources = [
   {
     label: "Servicio Canario de la Salud - Retribuciones 2026",
     url: "https://www3.gobiernodecanarias.org/sanidad/scs/contenidoGenerico.jsp?idCarpeta=c32fdf85-fc15-11dd-a72f-93771b0e33f6&idDocument=b2540aca-fdab-11dd-b2aa-596c3deb1b4e",
+  },
+  {
+    label: "SESCAM - Anexos y tablas retributivas 2026",
+    url: "https://sanidad.castillalamancha.es/sites/sescam.castillalamancha.es/files/documentos/legislacion/20260324/anexos_y_tablas_2026.pdf",
+  },
+  {
+    label: "Ibsalut - Retribuciones",
+    url: "https://www.ibsalut.es/professionals/recursos-humans/retribucions",
+  },
+  {
+    label: "SATSE Comunidad Valenciana - Tablas 2026",
+    url: "https://comunidadvalenciana.satse.es/noticias/-/v/687184/tablas-2026",
   },
   {
     label: "SES Extremadura - Tablas retributivas 2026",

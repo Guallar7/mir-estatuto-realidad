@@ -63,7 +63,7 @@ Nota metodológica: las medias del resumen usan la fila `Media de España` publi
 ## Fuentes
 
 - Ministerio de Sanidad - Nuevo Estatuto Marco: https://www.sanidad.gob.es/areas/profesionesSanitarias/nuevoEstatutoMarco.htm
-- Anteproyecto de Ley Estatuto Marco 08/01/2026: Propuesta-de-Anteproyecto-de-Ley-del-Estatuto-Marco-del-personal-estatutario-de-los-servicios-de-salud.pdf
+- Anteproyecto de Ley Estatuto Marco 08/01/2026: https://www.sanidad.gob.es/areas/profesionesSanitarias/docs/APL_personal_estatutario_08_01_2026.pdf
 - CESM - Comité de Huelga 08/04/2026: https://www.cesm.org/2026/04/08/el-comite-de-huelga-denuncia-que-el-ministerio-entorpece-la-negociacion-para-esconder-su-incapacidad-para-llegar-a-acuerdos-que-atiendan-las-reivindicaciones-del-colectivo/
 - CESM - Convocatoria huelga 22/01/2026: https://www.cesm.org/2026/01/22/el-comite-de-huelga-convoca-un-paro-indefinido-a-partir-del-proximo-16-de-febrero-para-conseguir-un-estatuto-medico-y-facultativo/
 - SATSE - Acuerdo con Sanidad 26/01/2026: https://www.satse.es/notas-prensa/-/v/85301/acuerdo-inicio-tramitacion-estatuto-marco

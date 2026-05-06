@@ -109,8 +109,8 @@ function App() {
         </div>
 
         <div className="hero-metrics" aria-label="Resumen principal">
-          <MetricCard label="R1 medio sin guardias" value={`${eur(current.grossNoGuards)} €`} detail="brutos/mes" />
-          <MetricCard label="R1 con 80 h de guardia" value={`${eur(current.netWithGuards)} €`} detail="netos/mes" tone="red" />
+          <MetricCard label={`${current.year} medio sin guardias`} value={`${eur(current.grossNoGuards)} €`} detail="brutos/mes" />
+          <MetricCard label={`${current.year} con 80 h de guardia`} value={`${eur(current.netWithGuards)} €`} detail="netos/mes" tone="red" />
           <MetricCard label="Horas reales mínimas" value={`${eur(TOTAL_HOURS, 1)} h`} detail="al mes" tone="amber" />
         </div>
       </section>
@@ -203,13 +203,15 @@ function App() {
             <button
               className={`issue ${expandedIssue === index ? "open" : ""}`}
               key={issue.title}
+              aria-expanded={expandedIssue === index}
+              aria-controls={`issue-answer-${index}`}
               onClick={() => setExpandedIssue(expandedIssue === index ? -1 : index)}
               type="button"
             >
               <span className="issue-title">{issue.title}</span>
               <span className="claim">{issue.claim}</span>
               {expandedIssue === index && (
-                <span className="answer">
+                <span className="answer" id={`issue-answer-${index}`}>
                   {issue.answer}
                   <small>{issue.refs.join(" · ")}</small>
                 </span>
@@ -241,13 +243,13 @@ function App() {
             </select>
           </label>
           <div className="sort-tabs" role="group" aria-label="Ordenar comunidades">
-            <button className={sortMode === "guardias" ? "active" : ""} onClick={() => setSortMode("guardias")} type="button">
+            <button aria-pressed={sortMode === "guardias"} className={sortMode === "guardias" ? "active" : ""} onClick={() => setSortMode("guardias")} type="button">
               Más guardia
             </button>
-            <button className={sortMode === "base" ? "active" : ""} onClick={() => setSortMode("base")} type="button">
+            <button aria-pressed={sortMode === "base"} className={sortMode === "base" ? "active" : ""} onClick={() => setSortMode("base")} type="button">
               Más base
             </button>
-            <button className={sortMode === "az" ? "active" : ""} onClick={() => setSortMode("az")} type="button">
+            <button aria-pressed={sortMode === "az"} className={sortMode === "az" ? "active" : ""} onClick={() => setSortMode("az")} type="button">
               A-Z
             </button>
           </div>
@@ -305,7 +307,7 @@ function App() {
 
         <div className="downloads" id="descargas">
           {downloads.map(([label, href]) => (
-            <a className="download-card" href={href} key={href}>
+            <a className="download-card" href={href} download key={href}>
               <Download size={20} />
               <span>{label}</span>
             </a>
@@ -347,6 +349,7 @@ function YearSelector({ yearIndex, setYearIndex }) {
         <button
           className={yearIndex === index ? "active" : ""}
           key={year}
+          aria-pressed={yearIndex === index}
           onClick={() => setYearIndex(index)}
           type="button"
         >
@@ -407,7 +410,7 @@ function CompactBar({ row, yearIndex, selected, onClick }) {
   const basePct = (base / total) * 100;
 
   return (
-    <button className={`compact-bar ${selected ? "selected" : ""}`} onClick={onClick} type="button">
+    <button aria-pressed={selected} className={`compact-bar ${selected ? "selected" : ""}`} onClick={onClick} type="button">
       <span className="name">{row.ccaa}</span>
       <span className="bar" style={{ width: `${totalPct}%` }}>
         <i className="base-part" style={{ width: `${basePct}%` }} />
