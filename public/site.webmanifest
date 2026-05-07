@@ -1,0 +1,25 @@
+{
+  "name": "MIR: no es sueldo, son guardias",
+  "short_name": "MIR Guardias",
+  "description": "Datos reales sobre retribuciones MIR, guardias, horas trabajadas y Estatuto Marco sanitario.",
+  "lang": "es",
+  "start_url": "/mir-estatuto-realidad/",
+  "scope": "/mir-estatuto-realidad/",
+  "display": "standalone",
+  "background_color": "#10253b",
+  "theme_color": "#10253b",
+  "icons": [
+    {
+      "src": "/mir-estatuto-realidad/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/mir-estatuto-realidad/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
