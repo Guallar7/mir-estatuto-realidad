@@ -35,7 +35,6 @@ import "./styles.css";
 const ORDINARY_HOURS = 162.5;
 const GUARD_HOURS = 80;
 const TOTAL_HOURS = 242.5;
-const TRAINING_TOTAL_HOURS = 264.2;
 
 const eur = (value, digits = 0) =>
   new Intl.NumberFormat("es-ES", {
@@ -50,7 +49,6 @@ function useYearData(yearIndex) {
 function App() {
   const [yearIndex, setYearIndex] = useState(0);
   const [selectedCcaa, setSelectedCcaa] = useState("Madrid");
-  const [includeTraining, setIncludeTraining] = useState(true);
   const [expandedIssue, setExpandedIssue] = useState(0);
   const [sortMode, setSortMode] = useState("guardias");
 
@@ -59,9 +57,7 @@ function App() {
   const selectedNet = selected.withGuardsNet[yearIndex];
   const selectedGross = selected.withGuardsGross[yearIndex];
   const selectedBase = selected.base[yearIndex];
-  const selectedHourly = selectedNet / (includeTraining ? TRAINING_TOTAL_HOURS : TOTAL_HOURS);
-  const displayedHourly = includeTraining ? current.realNetHourWithTraining : current.realNetHour;
-  const hoursScale = includeTraining ? TRAINING_TOTAL_HOURS : TOTAL_HOURS;
+  const selectedHourly = selectedNet / TOTAL_HOURS;
   const { scrollYProgress } = useScroll();
   const smoothScaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 24, restDelta: 0.001 });
   const reduceMotion = useReducedMotion();
@@ -200,25 +196,15 @@ function App() {
               <span>Guardias incluidas en el cartel</span>
               <strong>+{GUARD_HOURS} h/mes</strong>
             </div>
-            {includeTraining && (
-              <div className="calc-row muted">
-                <span>Estimación prudente de formación no registrada</span>
-                <strong>+{eur(TRAINING_TOTAL_HOURS - TOTAL_HOURS, 1)} h/mes</strong>
-              </div>
-            )}
             <div className="divider" />
             <div className="calc-row total">
               <span>Horas usadas para el €/h</span>
-              <strong>{eur(includeTraining ? TRAINING_TOTAL_HOURS : TOTAL_HOURS, 1)} h/mes</strong>
+              <strong>{eur(TOTAL_HOURS, 1)} h/mes</strong>
             </div>
-            <label className="toggle">
-              <input
-                type="checkbox"
-                checked={includeTraining}
-                onChange={(event) => setIncludeTraining(event.target.checked)}
-              />
-              Incluir 5 h/semana de estudio, sesiones, investigación o cursos
-            </label>
+            <p className="calc-note">
+              No se han sumado aquí las horas reales de estudio, sesiones, congresos, másteres, investigación
+              o formación postgrado que existen por encima de la jornada.
+            </p>
           </SpotlightPanel>
 
           <SpotlightPanel className="panel result-card">
@@ -227,7 +213,7 @@ function App() {
             <strong>{eur(current.netWithGuards)} € netos/mes</strong>
             <span>
               equivale a{" "}
-              <b>{eur(includeTraining ? current.realNetHourWithTraining : current.realNetHour, 2)} €/h netos</b>
+              <b>{eur(current.realNetHour, 2)} €/h netos</b>
             </span>
           </SpotlightPanel>
         </div>
@@ -266,7 +252,7 @@ function App() {
                 <strong>{eur(ORDINARY_HOURS, 1)} h/mes</strong>
               </div>
               <span className="hour-track">
-                <span className="hour-fill standard" style={{ width: `${(ORDINARY_HOURS / hoursScale) * 100}%` }} />
+                <span className="hour-fill standard" style={{ width: `${(ORDINARY_HOURS / TOTAL_HOURS) * 100}%` }} />
               </span>
             </div>
             <div className="hour-line resident">
@@ -275,38 +261,25 @@ function App() {
                 <strong>{eur(TOTAL_HOURS, 1)} h/mes</strong>
               </div>
               <span className="hour-track">
-                <span className="hour-fill ordinary" style={{ width: `${(ORDINARY_HOURS / hoursScale) * 100}%` }} />
-                <span className="hour-fill guard" style={{ width: `${(GUARD_HOURS / hoursScale) * 100}%` }} />
+                <span className="hour-fill ordinary" style={{ width: `${(ORDINARY_HOURS / TOTAL_HOURS) * 100}%` }} />
+                <span className="hour-fill guard" style={{ width: `${(GUARD_HOURS / TOTAL_HOURS) * 100}%` }} />
               </span>
             </div>
-            {includeTraining && (
-              <div className="hour-line training-extra">
-                <div className="hour-line-label">
-                  <span>Con formación no registrada</span>
-                  <strong>{eur(TRAINING_TOTAL_HOURS, 1)} h/mes</strong>
-                </div>
-                <span className="hour-track">
-                  <span className="hour-fill ordinary" style={{ width: `${(ORDINARY_HOURS / hoursScale) * 100}%` }} />
-                  <span className="hour-fill guard" style={{ width: `${(GUARD_HOURS / hoursScale) * 100}%` }} />
-                  <span className="hour-fill training" style={{ width: `${((TRAINING_TOTAL_HOURS - TOTAL_HOURS) / hoursScale) * 100}%` }} />
-                </span>
-              </div>
-            )}
           </div>
 
           <div className="hour-summary">
             <span>{eur(ORDINARY_HOURS, 1)} h ordinarias</span>
             <span>+ {GUARD_HOURS} h guardias</span>
-            {includeTraining && <span>+ {eur(TRAINING_TOTAL_HOURS - TOTAL_HOURS, 1)} h formación</span>}
-            <strong>= {eur(includeTraining ? TRAINING_TOTAL_HOURS : TOTAL_HOURS, 1)} h/mes</strong>
+            <strong>= {eur(TOTAL_HOURS, 1)} h/mes</strong>
           </div>
 
           <div className="hour-price">
             <span>Precio medio real empleado</span>
-            <strong>{eur(displayedHourly, 2)} €/h netos</strong>
+            <strong>{eur(current.realNetHour, 2)} €/h netos</strong>
             <small>
               Media nacional {current.year}: {eur(current.netWithGuards)} € netos/mes con 80 h de guardia /
-              {eur(includeTraining ? TRAINING_TOTAL_HOURS : TOTAL_HOURS, 1)} h reales.
+              {eur(TOTAL_HOURS, 1)} h reales. La formación no registrada va por encima y no está incluida en
+              este divisor.
             </small>
           </div>
         </SpotlightPanel>

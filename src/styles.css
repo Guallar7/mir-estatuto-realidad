@@ -496,18 +496,14 @@ h2 {
   font-size: 1.45rem;
 }
 
-.toggle {
-  align-items: flex-start;
-  color: var(--muted);
-  display: flex;
-  gap: 0.7rem;
-  line-height: 1.35;
-  margin-top: 1rem;
-}
-
-.toggle input {
-  accent-color: var(--green);
-  margin-top: 0.22rem;
+.calc-note {
+  background: var(--soft-blue);
+  border-radius: 14px;
+  color: var(--blue);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin: 1rem 0 0;
+  padding: 0.85rem;
 }
 
 .result-card {
@@ -671,10 +667,6 @@ h2 {
 
 .hour-fill.guard {
   background: var(--red);
-}
-
-.hour-fill.training {
-  background: var(--amber);
 }
 
 .hour-summary {
