@@ -4,9 +4,9 @@ Fecha de trabajo: 6 de mayo de 2026. Datos retributivos principales: informe SIM
 
 ## Tesis central
 
-El cartel presenta como `sueldo mensual` unas cifras que incorporan guardias. Eso mezcla dos magnitudes distintas: la jornada ordinaria y una bolsa de trabajo adicional, penosa y en noches/festivos. Con la hipótesis usada por el propio estudio de referencia, esos importes incluyen 80 horas mensuales de guardia, aproximadamente media jornada ordinaria adicional.
+El cartel presenta como `sueldo mensual` unas cifras que incorporan guardias. Eso mezcla dos magnitudes distintas: la jornada ordinaria y una bolsa de trabajo adicional, penosa y en noches/festivos. Con la hipótesis usada por el propio estudio de referencia, esos importes incluyen 80 horas mensuales de guardia, más de media jornada ordinaria adicional si se toma como referencia una jornada de 35 h/semana.
 
-Nota metodológica: las medias del resumen usan la fila `Media de España` publicada en la tabla SIMEG/CTO; la tabla por CCAA separa la parte ordinaria y la parte atribuible a guardias.
+Nota metodológica: las medias del resumen usan la fila `Media de España` publicada en la tabla SIMEG/CTO; la tabla por CCAA separa la parte ordinaria y la parte atribuible a guardias. Para el cálculo por hora se usa 35 h/semana anualizadas: `35 x 52 / 12 = 151,7 h/mes`. Sumando 80 h de guardia, el divisor principal es `231,7 h/mes`. Si una CCAA aplica 37,5 h/semana o un cómputo anual superior, el divisor sube a `242,5 h/mes` y el salario neto por hora baja.
 
 ## Cifras clave
 
@@ -16,9 +16,11 @@ Nota metodológica: las medias del resumen usan la fila `Media de España` publi
 | Neto mensual mostrado por el cartel/80 h | 2.087 € | 2.758 € |
 | Bruto mensual mostrado por el cartel/80 h | 2.806 € | 3.929 € |
 | Guardias dentro del bruto total | 48.4% | 49.8% |
-| Horas mensuales reales usadas en el cálculo | 242.5 h | 242.5 h |
-| Neto por hora real con 80 h de guardia | 8.61 €/h | 11.37 €/h |
-| Neto por hora con 5 h/semana formativas no registradas | 7.90 €/h | 10.44 €/h |
+| Horas ordinarias usadas en el cálculo | 151.7 h | 151.7 h |
+| Guardias incluidas en el cartel | 80 h | 80 h |
+| Horas mensuales reales usadas en el cálculo | 231.7 h | 231.7 h |
+| Neto por hora real con 80 h de guardia | 9.01 €/h | 11.91 €/h |
+| Escenario 37.5 h/semana, si aplica | 8.61 €/h | 11.37 €/h |
 
 ## Qué dice realmente el anteproyecto
 
@@ -58,7 +60,7 @@ Nota metodológica: las medias del resumen usan la fila `Media de España` publi
 
 ## Respuesta breve para redes o asamblea
 
-> El cartel de CSIF no muestra el sueldo normal de un MIR: suma unas 80 horas mensuales de guardias. Un R1 medio no pasa de 1.447 € brutos sin guardias; la cifra de 2.087 € netos sale de trabajar unas 242,5 h/mes. Eso deja la media R1 en torno a 8,6 € netos/h antes de contar estudio, sesiones, investigación y salidas tarde.
+> El cartel de CSIF no muestra el sueldo normal de un MIR: suma unas 80 horas mensuales de guardias. Un R1 medio no pasa de 1.447 € brutos sin guardias; la cifra de 2.087 € netos sale de trabajar unas 231,7 h/mes si usamos 35 h/semana anualizadas. Eso deja la media R1 en torno a 9,0 € netos/h antes de contar estudio, sesiones, investigación y salidas tarde. Si el cómputo ordinario aplicable es de 37,5 h/semana, baja a 8,6 € netos/h.
 
 ## Fuentes
 

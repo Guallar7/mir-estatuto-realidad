@@ -25,6 +25,7 @@ import {
   ccaaRows,
   downloads,
   estatutoIssues,
+  hourModel,
   residenceYears,
   sources,
   summaryByYear,
@@ -32,9 +33,10 @@ import {
 import { cn } from "./utils";
 import "./styles.css";
 
-const ORDINARY_HOURS = 162.5;
-const GUARD_HOURS = 80;
-const TOTAL_HOURS = 242.5;
+const ORDINARY_HOURS = hourModel.ordinaryHoursPerMonth;
+const GUARD_HOURS = hourModel.guardHoursPerMonth;
+const TOTAL_HOURS = hourModel.totalHoursPerMonth;
+const HOURS_37_5_MODEL = 37.5 * 52 / 12 + GUARD_HOURS;
 
 const eur = (value, digits = 0) =>
   new Intl.NumberFormat("es-ES", {
@@ -58,6 +60,7 @@ function App() {
   const selectedGross = selected.withGuardsGross[yearIndex];
   const selectedBase = selected.base[yearIndex];
   const selectedHourly = selectedNet / TOTAL_HOURS;
+  const currentHourly = current.netWithGuards / TOTAL_HOURS;
   const { scrollYProgress } = useScroll();
   const smoothScaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 24, restDelta: 0.001 });
   const reduceMotion = useReducedMotion();
@@ -180,8 +183,8 @@ function App() {
           <h2>Cuando metes las horas, el relato se cae.</h2>
           <p>
             Selecciona año de residencia. La cifra central usa la media nacional publicada en SIMEG/CTO con
-            80 horas mensuales de guardia. El €/h no es el precio de una guardia concreta: es el neto medio
-            con guardias dividido entre las horas reales trabajadas.
+            80 horas mensuales de guardia. El cálculo toma como referencia 35 h/semana anualizadas
+            ({eur(ORDINARY_HOURS, 1)} h/mes); algunas CCAA pueden tener 37,5 h o cómputos anuales propios.
           </p>
         </div>
 
@@ -190,7 +193,7 @@ function App() {
         <div className="calc-grid">
           <SpotlightPanel className="panel calculation">
             <div className="calc-row">
-              <span>Jornada ordinaria</span>
+              <span>Jornada ordinaria 35 h/semana</span>
               <strong>{eur(ORDINARY_HOURS, 1)} h/mes</strong>
             </div>
             <div className="calc-row danger">
@@ -203,8 +206,10 @@ function App() {
               <strong>{eur(TOTAL_HOURS, 1)} h/mes</strong>
             </div>
             <p className="calc-note">
-              No se han sumado aquí las horas reales de estudio, sesiones, congresos, másteres, investigación
-              o formación postgrado que existen por encima de la jornada.
+              Es un denominador conservador y anualizado: 35 h x 52 semanas / 12 meses. No se han sumado aquí
+              las horas reales de estudio, sesiones, congresos, másteres, investigación o formación postgrado
+              que existen por encima de la jornada. Si se aplica 37,5 h/semana, el divisor sube a{" "}
+              {eur(HOURS_37_5_MODEL, 1)} h/mes y el €/h baja.
             </p>
           </SpotlightPanel>
 
@@ -214,7 +219,7 @@ function App() {
             <strong>{eur(current.netWithGuards)} € netos/mes</strong>
             <span>
               equivale a{" "}
-              <b>{eur(current.realNetHour, 2)} €/h netos</b>
+              <b>{eur(currentHourly, 2)} €/h netos</b>
             </span>
           </SpotlightPanel>
         </div>
@@ -240,16 +245,16 @@ function App() {
             <span className="kicker">Horas frente a salario</span>
             <h3>{current.year}: jornada española frente a jornada MIR real</h3>
             <p>
-              La jornada completa estándar se aproxima con {eur(ORDINARY_HOURS, 1)} h/mes. El escenario del
-              cartel añade 80 h/mes de guardias. Resultado: {eur(TOTAL_HOURS, 1)} h/mes antes de contar
-              formación fuera de jornada.
+              Usamos 35 h/semana anualizadas como referencia principal: {eur(ORDINARY_HOURS, 1)} h/mes.
+              El escenario del cartel añade 80 h/mes de guardias. Resultado: {eur(TOTAL_HOURS, 1)} h/mes
+              antes de contar formación fuera de jornada.
             </p>
           </div>
 
           <div className="hours-visual" aria-label="Comparación de horas mensuales">
             <div className="hour-line">
               <div className="hour-line-label">
-                <span>Jornada laboral estándar</span>
+                <span>Jornada ordinaria 35 h/semana</span>
                 <strong>{eur(ORDINARY_HOURS, 1)} h/mes</strong>
               </div>
               <span className="hour-track">
@@ -276,7 +281,7 @@ function App() {
 
           <div className="hour-price">
             <span>Precio medio real empleado</span>
-            <strong>{eur(current.realNetHour, 2)} €/h netos</strong>
+            <strong>{eur(currentHourly, 2)} €/h netos</strong>
             <small>
               Media nacional {current.year}: {eur(current.netWithGuards)} € netos/mes con 80 h de guardia /
               {eur(TOTAL_HOURS, 1)} h reales. La formación no registrada va por encima y no está incluida en
@@ -485,6 +490,7 @@ function HoursMetricCard() {
 function GuardRateMetricCard({ data }) {
   const reduceMotion = useReducedMotion();
   const guardGross = data.grossWithGuards - data.grossNoGuards;
+  const realNetHour = data.netWithGuards / TOTAL_HOURS;
 
   return (
     <Motion.div
@@ -507,7 +513,7 @@ function GuardRateMetricCard({ data }) {
         <span>
           {eur(data.netWithGuards)} € / {eur(TOTAL_HOURS, 1)} h
         </span>
-        <b>{eur(data.realNetHour, 2)} €/h netos</b>
+        <b>{eur(realNetHour, 2)} €/h netos</b>
       </div>
       <small className="rate-context">
         Sin guardias: {eur(data.grossNoGuards)} € brutos/mes. Parte bruta atribuida a guardias: {eur(guardGross)} €.

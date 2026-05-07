@@ -54,7 +54,7 @@ Este índice separa fuentes primarias, documentos de contraste, material visual 
 | CESM - Distribución de jornada de 35 h por CCAA | https://www.cesm.org/2024/12/18/asi-esta-la-distribucion-de-jornada-laboral-de-35-horas-por-comunidades-autonomas/ | Contexto médico sobre implantación desigual de 35 h en comunidades autónomas. |
 | CSIF - CCAA pendientes de implantar 35 h en sanidad | https://www.csif.es/es/articulo/nacional/sanidad/89481 | Contexto sindical reciente sobre territorios donde las 35 h no están plenamente implantadas. |
 
-Nota metodológica: los documentos derivados antiguos pueden contener el escenario de 37,5 h/semana (`162,5 h/mes`). Tras la revisión de jornada, el cálculo comunicativo debe distinguir entre escenario de 35 h/semana, escenario de 37,5 h/semana y cómputo anual/mensual aplicable en cada comunidad autónoma.
+Nota metodológica: el cálculo comunicativo principal usa 35 h/semana anualizadas (`35 x 52 / 12 = 151,7 h/mes`). Con 80 h de guardia, el divisor principal es `231,7 h/mes`. Si una CCAA aplica 37,5 h/semana o un cómputo anual superior, el divisor sube a `242,5 h/mes` y el salario neto por hora baja.
 
 ### 5. Contexto Profesional, Sindical Y De Movilización
 
@@ -75,9 +75,9 @@ Nota metodológica: los documentos derivados antiguos pueden contener el escenar
 |---|---|---|
 | Datos estructurados de la web | [src/data.js](src/data.js) | Fuente interna de cifras, filas CCAA, falacias y enlaces que alimentan la interfaz. |
 | Utilidades de cálculo | [src/utils.js](src/utils.js) | Formateo y cálculo usado por la web. |
-| Dossier Markdown | [public/downloads/dossier_mir_estatuto_marco.md](public/downloads/dossier_mir_estatuto_marco.md) | Dossier narrativo descargable. Revisar denominador horario tras la discusión de 35 h. |
-| Dossier DOCX | [public/downloads/dossier_mir_estatuto_marco.docx](public/downloads/dossier_mir_estatuto_marco.docx) | Versión editable del dossier. Revisar denominador horario tras la discusión de 35 h. |
-| Argumentario rápido | [public/downloads/argumentario_rapido_csif_mir.md](public/downloads/argumentario_rapido_csif_mir.md) | Resumen para redes/asamblea. Revisar denominador horario tras la discusión de 35 h. |
+| Dossier Markdown | [public/downloads/dossier_mir_estatuto_marco.md](public/downloads/dossier_mir_estatuto_marco.md) | Dossier narrativo descargable actualizado con denominador de 35 h/semana anualizadas. |
+| Dossier DOCX | [public/downloads/dossier_mir_estatuto_marco.docx](public/downloads/dossier_mir_estatuto_marco.docx) | Versión editable del dossier actualizada con denominador de 35 h/semana anualizadas. |
+| Argumentario rápido | [public/downloads/argumentario_rapido_csif_mir.md](public/downloads/argumentario_rapido_csif_mir.md) | Resumen para redes/asamblea actualizado con denominador de 35 h/semana anualizadas. |
 | Excel de retribuciones | [public/downloads/retribuciones_mir_2026.xlsx](public/downloads/retribuciones_mir_2026.xlsx) | Tabla de trabajo para análisis y visualizaciones. |
 | CSV de retribuciones | [public/downloads/datos_retribuciones_mir_2026.csv](public/downloads/datos_retribuciones_mir_2026.csv) | Datos tabulares reutilizables. |
 | Checklist de comparación del Estatuto | [docs/checklist-comparacion-estatuto-medicos.md](docs/checklist-comparacion-estatuto-medicos.md) | Guía exhaustiva para comparar anteproyecto y condiciones actuales. |

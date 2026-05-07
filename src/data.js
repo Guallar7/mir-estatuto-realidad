@@ -1,5 +1,14 @@
 export const residenceYears = ["R1", "R2", "R3", "R4", "R5"];
 
+export const hourModel = {
+  weeklyOrdinaryHours: 35,
+  ordinaryHoursPerMonth: (35 * 52) / 12,
+  guardHoursPerMonth: 80,
+  totalHoursPerMonth: (35 * 52) / 12 + 80,
+  note:
+    "Se usa 35 h/semana anualizada como escenario principal. Algunas CCAA mantienen 37,5 h o cómputos anuales propios.",
+};
+
 export const summaryByYear = [
   {
     year: "R1",
@@ -7,35 +16,27 @@ export const summaryByYear = [
     netWithGuards: 2087,
     grossWithGuards: 2806,
     guardShare: 0.484,
-    realNetHour: 8.61,
-    realNetHourWithTraining: 7.9,
   },
   {
     year: "R2",
-    grossNoGuards: 1560,
+    grossNoGuards: 1555,
     netWithGuards: 2284,
     grossWithGuards: 3114,
-    guardShare: 0.499,
-    realNetHour: 9.42,
-    realNetHourWithTraining: 8.65,
+    guardShare: 0.501,
   },
   {
     year: "R3",
-    grossNoGuards: 1699,
+    grossNoGuards: 1694,
     netWithGuards: 2486,
     grossWithGuards: 3452,
-    guardShare: 0.508,
-    realNetHour: 10.25,
-    realNetHourWithTraining: 9.42,
+    guardShare: 0.509,
   },
   {
     year: "R4",
-    grossNoGuards: 1838,
+    grossNoGuards: 1833,
     netWithGuards: 2684,
     grossWithGuards: 3790,
-    guardShare: 0.515,
-    realNetHour: 11.07,
-    realNetHourWithTraining: 10.16,
+    guardShare: 0.516,
   },
   {
     year: "R5",
@@ -43,8 +44,6 @@ export const summaryByYear = [
     netWithGuards: 2758,
     grossWithGuards: 3929,
     guardShare: 0.498,
-    realNetHour: 11.37,
-    realNetHourWithTraining: 10.44,
   },
 ];
 
@@ -322,7 +321,7 @@ export const estatutoIssues = [
     title: "Falacia 5: una tabla de sueldos con guardias sirve para comparar salarios",
     claim: "Los MIR cobran más de 2.000 euros netos al mes.",
     answer:
-      "Esa cifra incorpora unas 80 horas mensuales adicionales. Sin guardias, el R1 medio está en torno a 1.447 euros brutos/mes. Con guardias, el cálculo real exige dividir por unas 242,5 h/mes.",
+      "Esa cifra incorpora unas 80 horas mensuales adicionales. Sin guardias, el R1 medio está en torno a 1.447 euros brutos/mes. Con una jornada ordinaria anualizada de 35 h/semana, el cálculo real exige dividir por unas 231,7 h/mes, antes de sumar formación no registrada.",
     refs: ["SIMEG 2026", "Tabla CSIF/CTO"],
   },
   {
@@ -372,8 +371,24 @@ export const sources = [
     url: "https://www.sanidad.gob.es/areas/profesionesSanitarias/docs/APL_personal_estatutario_08_01_2026.pdf",
   },
   {
+    label: "BOE - Ley 55/2003 Estatuto Marco vigente",
+    url: "https://www.boe.es/buscar/act.php?id=BOE-A-2003-23101",
+  },
+  {
+    label: "BOE - Resolución AGE 35 horas 14/04/2026",
+    url: "https://www.boe.es/buscar/act.php?id=BOE-A-2026-8287",
+  },
+  {
     label: "SIMEG - Retribuciones MIR 2026",
     url: "https://simeg.org/wp/wp-content/uploads/2026/04/Retribuciones-MIR-2026.pdf",
+  },
+  {
+    label: "CESM - Distribución jornada 35 horas por CCAA",
+    url: "https://www.cesm.org/2024/12/18/asi-esta-la-distribucion-de-jornada-laboral-de-35-horas-por-comunidades-autonomas/",
+  },
+  {
+    label: "CSIF - CCAA pendientes de implantar 35 horas",
+    url: "https://www.csif.es/es/articulo/nacional/sanidad/89481",
   },
   {
     label: "CESM - Comité de Huelga mantiene movilizaciones",

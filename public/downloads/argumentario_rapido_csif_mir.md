@@ -6,7 +6,7 @@ El cartel no muestra el sueldo normal de un MIR: mezcla sueldo ordinario con una
 
 ## Respuesta de 30 segundos
 
-No es correcto decir que “los MIR cobran 2.000-3.000 euros” sin explicar las horas. Esas cifras incluyen unas 80 horas de guardia al mes. Con jornada ordinaria de 37,5 h/semana, eso son unas 242,5 h/mes trabajadas. En un R1 medio, 2.087 euros netos entre esas horas son unos 8,6 euros netos/hora, antes de contar estudio, sesiones, investigación, cursos y salidas tarde.
+No es correcto decir que “los MIR cobran 2.000-3.000 euros” sin explicar las horas. Esas cifras incluyen unas 80 horas de guardia al mes. Con jornada ordinaria anualizada de 35 h/semana, eso son unas 231,7 h/mes trabajadas. En un R1 medio, 2.087 euros netos entre esas horas son unos 9,0 euros netos/hora, antes de contar estudio, sesiones, investigación, cursos y salidas tarde. Si el cómputo aplicable es 37,5 h/semana, el divisor sube a 242,5 h/mes y el R1 baja a 8,6 euros netos/hora.
 
 ## Tres preguntas para desmontar la tabla
 
@@ -20,10 +20,11 @@ No es correcto decir que “los MIR cobran 2.000-3.000 euros” sin explicar las
 |---|---:|
 | R1 medio bruto sin guardias | 1.447 €/mes |
 | R1 medio neto con 80 h de guardia | 2.087 €/mes |
-| Horas ordinarias/mes usadas | 162,5 h |
+| Horas ordinarias/mes usadas | 151,7 h |
 | Guardias añadidas | 80 h |
-| Total mínimo de horas/mes | 242,5 h |
-| Neto real R1 con 80 h | 8,61 €/h |
+| Total mínimo de horas/mes | 231,7 h |
+| Neto real R1 con 80 h | 9,01 €/h |
+| Neto R1 si aplica 37,5 h/semana | 8,61 €/h |
 | Peso de guardias en bruto R1 | 48,4% |
 
 ## Frase final
