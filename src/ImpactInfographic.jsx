@@ -1,4 +1,4 @@
-import { ArrowLeft, BadgeEuro, Calculator, Clock3, ExternalLink } from "lucide-react";
+import { ArrowLeft, BadgeEuro, BookOpenCheck, Calculator, Clock3, ExternalLink } from "lucide-react";
 import { hourModel, summaryByYear } from "./data";
 
 const ORDINARY_HOURS = hourModel.ordinaryHoursPerMonth;
@@ -81,6 +81,19 @@ export function ImpactInfographic() {
           <b>=</b>
           <strong>{eur(r1Hourly, 2)} €/h netos</strong>
         </div>
+
+        <aside className="impact-training-note" aria-label="Trabajo formativo no incluido en el calculo">
+          <BookOpenCheck aria-hidden="true" />
+          <div>
+            <span>Y esto sigue siendo conservador</span>
+            <p>
+              No se añade al cálculo porque no está cuantificado aquí, pero muchos residentes pasan tardes y
+              fines de semana estudiando, preparando sesiones, cursando másteres o postgrados, doctorándose,
+              asistiendo a congresos, investigando y publicando. Ese trabajo formativo no se retribuye y,
+              a menudo, tiene coste directo para el propio residente.
+            </p>
+          </div>
+        </aside>
 
         <div className="impact-grid">
           <div className="impact-stat">
