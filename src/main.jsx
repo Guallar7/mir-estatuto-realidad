@@ -35,10 +35,14 @@ import {
 import { cn } from "./utils";
 import "./styles.css";
 
+const ORDINARY_WEEKLY_HOURS = hourModel.weeklyOrdinaryHours;
 const ORDINARY_HOURS = hourModel.ordinaryHoursPerMonth;
 const GUARD_HOURS = hourModel.guardHoursPerMonth;
+const GUARD_WEEKLY_EQUIVALENT = hourModel.guardHoursPerWeekEquivalent;
 const TOTAL_HOURS = hourModel.totalHoursPerMonth;
+const TOTAL_WEEKLY_EQUIVALENT = hourModel.totalHoursPerWeekEquivalent;
 const HOURS_37_5_MODEL = 37.5 * 52 / 12 + GUARD_HOURS;
+const HOURS_37_5_WEEKLY_MODEL = 37.5 + GUARD_WEEKLY_EQUIVALENT;
 
 const eur = (value, digits = 0) =>
   new Intl.NumberFormat("es-ES", {
@@ -163,7 +167,9 @@ function App() {
               transition={reduceMotion ? { duration: 0 } : { duration: 0.55, delay: 0.16 }}
             >
               El cartel que presume de sueldos MIR esconde la clave: para llegar a esas cifras hay que sumar
-              unas <strong>80 horas mensuales</strong> de tardes, noches, fines de semana y festivos.
+              unas <strong>80 horas mensuales de guardia</strong>, equivalentes a
+              {" "}{eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de media. Y eso sin contar la actividad
+              formativa extra.
             </Motion.p>
             <div className="hero-actions">
               <a className="button primary" href="#datos">
@@ -305,8 +311,9 @@ function App() {
           <h2>Cuando metes las horas, el relato se cae.</h2>
           <p>
             Selecciona año de residencia. La cifra central usa la media nacional publicada en SIMEG/CTO con
-            80 horas mensuales de guardia. El cálculo toma como referencia 35 h/semana anualizadas
-            ({eur(ORDINARY_HOURS, 1)} h/mes); algunas CCAA pueden tener 37,5 h o cómputos anuales propios.
+            80 horas mensuales de guardia. El dinero se publica al mes, así que el €/h se calcula con horas
+            mensuales; al lado mostramos el equivalente semanal para compararlo con la jornada. La referencia
+            ordinaria es {ORDINARY_WEEKLY_HOURS} h/semana anualizadas ({eur(ORDINARY_HOURS, 1)} h/mes).
           </p>
         </div>
 
@@ -315,24 +322,26 @@ function App() {
         <div className="calc-grid">
           <SpotlightPanel className="panel calculation">
             <div className="calc-row">
-              <span>Jornada ordinaria 35 h/semana</span>
+              <span>Jornada ordinaria {ORDINARY_WEEKLY_HOURS} h/semana</span>
               <strong>{eur(ORDINARY_HOURS, 1)} h/mes</strong>
             </div>
             <div className="calc-row danger">
-              <span>Guardias incluidas en el cartel</span>
+              <span>Guardias incluidas en el cartel: {eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de media</span>
               <strong>+{GUARD_HOURS} h/mes</strong>
             </div>
             <div className="divider" />
             <div className="calc-row total">
-              <span>Horas usadas para el €/h</span>
+              <span>Horas usadas para el €/h: {eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana de media</span>
               <strong>{eur(TOTAL_HOURS, 1)} h/mes</strong>
             </div>
             <p className="calc-note">
-              Es un denominador conservador y anualizado: 35 h x 52 semanas / 12 meses. No entra en este
-              cálculo el tiempo que muchos residentes dedican por las tardes a estudiar, preparar sesiones,
-              hacer postgrados o másteres, doctorado, congresos, investigación y publicaciones. Ese trabajo
-              formativo suele no estar retribuido y, con frecuencia, además cuesta dinero al propio residente.
-              Si se aplica 37,5 h/semana, el divisor sube a {eur(HOURS_37_5_MODEL, 1)} h/mes y el €/h baja.
+              No estamos usando mensual y semanal como si fueran intercambiables: mensual sirve para dividir
+              el sueldo mensual, y semanal sirve para entender la carga de trabajo frente a los límites de
+              jornada. El denominador es conservador y anualizado: {ORDINARY_WEEKLY_HOURS} h x 52 semanas /
+              12 meses. No entra en este cálculo el tiempo que muchos residentes dedican por las tardes a
+              estudiar, preparar sesiones, hacer postgrados o másteres, doctorado, congresos, investigación y
+              publicaciones. Si se aplica 37,5 h/semana, el divisor sube a {eur(HOURS_37_5_MODEL, 1)} h/mes
+              ({eur(HOURS_37_5_WEEKLY_MODEL, 1)} h/semana de media) y el €/h baja.
             </p>
           </SpotlightPanel>
 
@@ -371,16 +380,18 @@ function App() {
             <span className="kicker">Horas frente a salario</span>
             <h3>{current.year}: jornada española frente a jornada MIR real</h3>
             <p>
-              Usamos 35 h/semana anualizadas como referencia principal: {eur(ORDINARY_HOURS, 1)} h/mes.
-              El escenario del cartel añade 80 h/mes de guardias. Resultado: {eur(TOTAL_HOURS, 1)} h/mes
-              sin convertir en horas de cálculo todo el trabajo formativo no retribuido que queda fuera.
+              Usamos {ORDINARY_WEEKLY_HOURS} h/semana anualizadas como referencia principal:
+              {" "}{eur(ORDINARY_HOURS, 1)} h/mes. El escenario del cartel añade {GUARD_HOURS} h/mes de
+              guardias, equivalentes a {eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de media. Resultado:
+              {" "}{eur(TOTAL_HOURS, 1)} h/mes, o {eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana de media, sin
+              convertir en horas de cálculo todo el trabajo formativo no retribuido que queda fuera.
             </p>
           </div>
 
-          <div className="hours-visual" aria-label="Comparación de horas mensuales">
+          <div className="hours-visual" aria-label="Comparación de horas mensuales y semanales">
             <div className="hour-line">
               <div className="hour-line-label">
-                <span>Jornada ordinaria 35 h/semana</span>
+                <span>Jornada ordinaria {ORDINARY_WEEKLY_HOURS} h/semana</span>
                 <strong>{eur(ORDINARY_HOURS, 1)} h/mes</strong>
               </div>
               <span className="hour-track">
@@ -389,7 +400,7 @@ function App() {
             </div>
             <div className="hour-line resident">
               <div className="hour-line-label">
-                <span>MIR con 80 h de guardia</span>
+                <span>MIR con {GUARD_HOURS} h/mes de guardia: {eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana</span>
                 <strong>{eur(TOTAL_HOURS, 1)} h/mes</strong>
               </div>
               <span className="hour-track">
@@ -400,9 +411,10 @@ function App() {
           </div>
 
           <div className="hour-summary">
-            <span>{eur(ORDINARY_HOURS, 1)} h ordinarias</span>
-            <span>+ {GUARD_HOURS} h guardias</span>
-            <strong>= {eur(TOTAL_HOURS, 1)} h/mes</strong>
+            <span>{ORDINARY_WEEKLY_HOURS} h/semana ordinarias</span>
+            <span>{eur(ORDINARY_HOURS, 1)} h/mes ordinarias</span>
+            <span>+ {GUARD_HOURS} h/mes guardias ({eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana)</span>
+            <strong>= {eur(TOTAL_HOURS, 1)} h/mes = {eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana</strong>
           </div>
 
           <div className="hour-price">
@@ -410,8 +422,9 @@ function App() {
             <strong>{eur(currentHourly, 2)} €/h netos</strong>
             <small>
               Media nacional {current.year}: {eur(current.netWithGuards)} € netos/mes con 80 h de guardia /
-              {eur(TOTAL_HOURS, 1)} h reales. Estudio, sesiones, congresos, postgrados, doctorado,
-              investigación y publicaciones van por encima y no están incluidos en este divisor.
+              {eur(TOTAL_HOURS, 1)} h/mes reales ({eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana de media).
+              Estudio, sesiones, congresos, postgrados, doctorado, investigación y publicaciones van por
+              encima y no están incluidos en este divisor.
             </small>
           </div>
         </SpotlightPanel>
@@ -610,8 +623,11 @@ function HoursMetricCard() {
       transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 20 }}
     >
       <span>Horas reales mínimas</span>
-      <strong>{eur(TOTAL_HOURS, 1)} h</strong>
-      <small>{eur(ORDINARY_HOURS, 1)} h ordinarias + {GUARD_HOURS} h guardias</small>
+      <strong>{eur(TOTAL_HOURS, 1)} h/mes</strong>
+      <small>
+        {eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana de media: {eur(ORDINARY_HOURS, 1)} h/mes ordinarias +
+        {" "}{GUARD_HOURS} h/mes guardias
+      </small>
     </Motion.div>
   );
 }
@@ -634,9 +650,9 @@ function GuardRateMetricCard({ data }) {
       <strong>{eur(data.netWithGuards)} €</strong>
       <small>netos/mes</small>
       <div className="rate-breakdown">
-        <span>{eur(ORDINARY_HOURS, 1)} h ordinarias</span>
-        <span>+ {GUARD_HOURS} h guardias</span>
-        <b>= {eur(TOTAL_HOURS, 1)} h/mes</b>
+        <span>{ORDINARY_WEEKLY_HOURS} h/semana ordinarias</span>
+        <span>+ {GUARD_HOURS} h/mes guardias</span>
+        <b>= {eur(TOTAL_HOURS, 1)} h/mes = {eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana</b>
       </div>
       <div className="rate-footer">
         <span>

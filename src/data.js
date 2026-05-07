@@ -4,9 +4,11 @@ export const hourModel = {
   weeklyOrdinaryHours: 35,
   ordinaryHoursPerMonth: (35 * 52) / 12,
   guardHoursPerMonth: 80,
+  guardHoursPerWeekEquivalent: (80 * 12) / 52,
   totalHoursPerMonth: (35 * 52) / 12 + 80,
+  totalHoursPerWeekEquivalent: 35 + (80 * 12) / 52,
   note:
-    "Se usa 35 h/semana anualizada como escenario principal. Algunas CCAA mantienen 37,5 h o cómputos anuales propios.",
+    "Se usa 35 h/semana anualizada como escenario principal. El sueldo se divide por horas mensuales porque el dato salarial es mensual; se muestra el equivalente semanal para comparar carga de trabajo y límites de jornada. Algunas CCAA mantienen 37,5 h o cómputos anuales propios.",
 };
 
 export const summaryByYear = [
@@ -323,7 +325,7 @@ export const estatutoIssues = [
     title: "Falacia 5: una tabla de sueldos con guardias sirve para comparar salarios",
     claim: "Los MIR cobran más de 2.000 euros netos al mes.",
     answer:
-      "Esa cifra incorpora unas 80 horas mensuales adicionales. Sin guardias, el R1 medio está en torno a 1.447 euros brutos/mes. Con una jornada ordinaria anualizada de 35 h/semana, el cálculo real exige dividir por unas 231,7 h/mes. Y ese divisor ni siquiera suma tardes de estudio, sesiones, congresos, postgrados, másteres, doctorado, investigación o publicaciones, a menudo no retribuidas y con coste para el propio residente.",
+      "Esa cifra incorpora unas 80 horas mensuales de guardia adicionales, equivalentes a unas 18,5 h/semana de media. Sin guardias, el R1 medio está en torno a 1.447 euros brutos/mes. Con una jornada ordinaria anualizada de 35 h/semana, el cálculo real exige dividir por unas 231,7 h/mes, es decir, unas 53,5 h/semana de media. Y ese divisor ni siquiera suma tardes de estudio, sesiones, congresos, postgrados, másteres, doctorado, investigación o publicaciones, a menudo no retribuidas y con coste para el propio residente.",
     refs: ["SIMEG 2026", "Tabla CSIF/CTO"],
   },
   {

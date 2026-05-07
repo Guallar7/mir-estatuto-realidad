@@ -1,9 +1,12 @@
 import { ArrowLeft, BadgeEuro, BookOpenCheck, Calculator, Clock3, ExternalLink } from "lucide-react";
 import { hourModel, summaryByYear } from "./data";
 
+const ORDINARY_WEEKLY_HOURS = hourModel.weeklyOrdinaryHours;
 const ORDINARY_HOURS = hourModel.ordinaryHoursPerMonth;
 const GUARD_HOURS = hourModel.guardHoursPerMonth;
+const GUARD_WEEKLY_EQUIVALENT = hourModel.guardHoursPerWeekEquivalent;
 const TOTAL_HOURS = hourModel.totalHoursPerMonth;
+const TOTAL_WEEKLY_EQUIVALENT = hourModel.totalHoursPerWeekEquivalent;
 
 const eur = (value, digits = 0) =>
   new Intl.NumberFormat("es-ES", {
@@ -24,7 +27,10 @@ export function ImpactInfographic() {
       <article className="impact-infographic standalone" aria-labelledby="impact-title">
         <div className="impact-topline">
           <span>Respuesta rápida a la tabla del CSIF</span>
-          <strong>Datos SIMEG/CTO 2026 · escenario con 80 h de guardia al mes</strong>
+          <strong>
+            Datos SIMEG/CTO 2026 · escenario con {GUARD_HOURS} h/mes de guardia
+            {" "}({eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de media)
+          </strong>
         </div>
 
         <div className="impact-hero">
@@ -70,7 +76,9 @@ export function ImpactInfographic() {
             <span>Lo que falta dividir</span>
             <strong>{eur(TOTAL_HOURS, 1)} h/mes</strong>
             <small>
-              {eur(ORDINARY_HOURS, 1)} h ordinarias + {GUARD_HOURS} h de guardia
+              {eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana de media:
+              {" "}{ORDINARY_WEEKLY_HOURS} h/semana ordinarias + {eur(GUARD_WEEKLY_EQUIVALENT, 1)}
+              {" "}h/semana de guardia
             </small>
           </div>
         </div>
@@ -78,7 +86,7 @@ export function ImpactInfographic() {
         <div className="formula-strip" aria-label="Formula del calculo por hora">
           <span>{eur(r1.netWithGuards)} € netos</span>
           <b>/</b>
-          <span>{eur(TOTAL_HOURS, 1)} horas reales</span>
+          <span>{eur(TOTAL_HOURS, 1)} h/mes reales</span>
           <b>=</b>
           <strong>{eur(r1Hourly, 2)} €/h netos</strong>
         </div>
@@ -99,11 +107,11 @@ export function ImpactInfographic() {
         <div className="impact-grid">
           <div className="impact-stat">
             <Clock3 aria-hidden="true" />
-            <span>Guardias mensuales</span>
-            <strong>+{GUARD_HOURS} h</strong>
+            <span>Guardias del cartel</span>
+            <strong>+{GUARD_HOURS} h/mes</strong>
             <small>
-              un {eur(guardExtraPct, 0)}% extra sobre la jornada ordinaria anualizada; además, no computa para
-              la jubilación.
+              equivalen a +{eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de media: un {eur(guardExtraPct, 0)}%
+              extra sobre la jornada ordinaria anualizada; además, no computa para la jubilación.
             </small>
           </div>
           <div className="impact-stat">
@@ -122,7 +130,7 @@ export function ImpactInfographic() {
 
         <div className="impact-hours">
           <div className="impact-hour-label">
-            <span>Jornada ordinaria</span>
+            <span>Jornada ordinaria {ORDINARY_WEEKLY_HOURS} h/semana</span>
             <strong>{eur(ORDINARY_HOURS, 1)} h</strong>
           </div>
           <div className="impact-hour-bar">
@@ -130,7 +138,7 @@ export function ImpactInfographic() {
             <span className="impact-hour-guard" style={{ width: `${(GUARD_HOURS / TOTAL_HOURS) * 100}%` }} />
           </div>
           <div className="impact-hour-label resident">
-            <span>MIR con el escenario del cartel</span>
+            <span>MIR con el escenario del cartel: {eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana</span>
             <strong>{eur(TOTAL_HOURS, 1)} h/mes</strong>
           </div>
         </div>
@@ -138,9 +146,10 @@ export function ImpactInfographic() {
         <div className="impact-bottom">
           <p>
             Incluso usando el año con cifra neta más alta, el argumento no cambia: un R5 llega a{" "}
-            {eur(r5.netWithGuards)} € netos solo al sumar 80 h mensuales de guardia. Dividido entre{" "}
-            {eur(TOTAL_HOURS, 1)} h reales, son <strong>{eur(r5Hourly, 2)} €/h netos</strong>. La comparación
-            honesta debe mostrar tres cosas: sueldo base, guardias y horas trabajadas.
+            {eur(r5.netWithGuards)} € netos solo al sumar {GUARD_HOURS} h mensuales de guardia. Dividido entre{" "}
+            {eur(TOTAL_HOURS, 1)} h/mes reales ({eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana de media), son{" "}
+            <strong>{eur(r5Hourly, 2)} €/h netos</strong>. La comparación honesta debe mostrar tres cosas:
+            sueldo base, guardias y horas trabajadas.
           </p>
           <a className="button primary impact-button" href="./">
             <ArrowLeft size={18} /> Volver a la web
