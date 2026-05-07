@@ -440,6 +440,55 @@ h1 {
   line-height: 1.35;
 }
 
+.impact-context {
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.impact-context div {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.impact-context span {
+  color: #ffe2ba;
+  font-size: 0.82rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.impact-context p {
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.45;
+  margin-bottom: 0;
+}
+
+.context-link {
+  align-items: center;
+  align-self: center;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 999px;
+  color: var(--blue);
+  display: inline-flex;
+  font-weight: 950;
+  gap: 0.45rem;
+  justify-content: center;
+  padding: 0.72rem 0.9rem;
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.context-link:hover,
+.context-link:focus-visible {
+  box-shadow: 0 14px 32px rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
 .impact-compare {
   display: grid;
   gap: 0.7rem;
@@ -1464,6 +1513,11 @@ footer strong {
     grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
   }
 
+  .impact-context {
+    align-items: center;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) auto;
+  }
+
   .impact-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -1666,6 +1720,10 @@ footer strong {
 
   .formula-strip b {
     line-height: 0.85;
+  }
+
+  .context-link {
+    width: 100%;
   }
 }
 

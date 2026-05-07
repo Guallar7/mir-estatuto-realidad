@@ -1,4 +1,4 @@
-import { ArrowLeft, BadgeEuro, Calculator, Clock3 } from "lucide-react";
+import { ArrowLeft, BadgeEuro, Calculator, Clock3, ExternalLink } from "lucide-react";
 import { hourModel, summaryByYear } from "./data";
 
 const ORDINARY_HOURS = hourModel.ordinaryHoursPerMonth;
@@ -23,7 +23,7 @@ export function ImpactInfographic() {
     <main className="standalone-infographic-page">
       <article className="impact-infographic standalone" aria-labelledby="impact-title">
         <div className="impact-topline">
-          <span>Respuesta rápida al cartel del CSIF</span>
+          <span>Respuesta rápida a la tabla del CSIF</span>
           <strong>Datos SIMEG/CTO 2026 · escenario con 80 h de guardia al mes</strong>
         </div>
 
@@ -39,11 +39,31 @@ export function ImpactInfographic() {
           </div>
         </div>
 
+        <section className="impact-context" aria-label="Contexto de la respuesta">
+          <div>
+            <span>A quién responde</span>
+            <p>
+              A un cartel de CSIF que presenta importes netos mensuales de residentes MIR por comunidad
+              autónoma y año de residencia.
+            </p>
+          </div>
+          <div>
+            <span>Qué omite</span>
+            <p>
+              La cifra llamativa no es sueldo ordinario: incluye guardias. Sin enseñar las horas, la tabla
+              convierte noches, fines de semana y festivos en una supuesta nómina normal.
+            </p>
+          </div>
+          <a className="context-link" href="evidence/csif-tabla.jpeg" target="_blank" rel="noreferrer">
+            Ver tabla original <ExternalLink size={16} />
+          </a>
+        </section>
+
         <div className="impact-compare" aria-label="Comparación entre el mensaje del cartel y el cálculo real">
           <div className="claim-block csif-side">
             <span>Lo que parece decir el cartel</span>
             <strong>{eur(r1.netWithGuards)} € netos</strong>
-            <small>R1 con guardias como si fuera sueldo mensual ordinario</small>
+            <small>R1 con guardias presentado como si fuera sueldo mensual ordinario</small>
           </div>
           <div className="claim-block reality-side">
             <span>Lo que falta dividir</span>
@@ -100,9 +120,10 @@ export function ImpactInfographic() {
 
         <div className="impact-bottom">
           <p>
-            Un R5 tampoco desmonta el argumento: {eur(r5.netWithGuards)} € netos con 80 h de guardia son{" "}
-            <strong>{eur(r5Hourly, 2)} €/h netos</strong>. La tabla solo funciona si oculta el denominador:
-            tardes, noches, fines de semana y festivos.
+            Incluso usando el año con cifra neta más alta, el argumento no cambia: un R5 llega a{" "}
+            {eur(r5.netWithGuards)} € netos solo al sumar 80 h mensuales de guardia. Dividido entre{" "}
+            {eur(TOTAL_HOURS, 1)} h reales, son <strong>{eur(r5Hourly, 2)} €/h netos</strong>. La comparación
+            honesta debe mostrar tres cosas: sueldo base, guardias y horas trabajadas.
           </p>
           <a className="button primary impact-button" href="./">
             <ArrowLeft size={18} /> Volver a la web
