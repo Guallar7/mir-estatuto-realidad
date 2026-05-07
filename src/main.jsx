@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   AnimatePresence,
@@ -53,6 +53,8 @@ function App() {
   const [selectedCcaa, setSelectedCcaa] = useState("Madrid");
   const [expandedIssue, setExpandedIssue] = useState(0);
   const [sortMode, setSortMode] = useState("guardias");
+  const ccaaHighlightRef = useRef(null);
+  const shouldScrollToCcaaHighlightRef = useRef(false);
 
   const current = useYearData(yearIndex);
   const selected = ccaaRows.find((row) => row.ccaa === selectedCcaa) ?? ccaaRows[0];
@@ -65,6 +67,11 @@ function App() {
   const smoothScaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 24, restDelta: 0.001 });
   const reduceMotion = useReducedMotion();
   const scaleX = reduceMotion ? scrollYProgress : smoothScaleX;
+
+  const selectCcaa = (ccaa, scrollToHighlight = false) => {
+    shouldScrollToCcaaHighlightRef.current = scrollToHighlight;
+    setSelectedCcaa(ccaa);
+  };
 
   const sortedRows = useMemo(() => {
     const rows = [...ccaaRows];
@@ -91,6 +98,17 @@ function App() {
     window.addEventListener("hashchange", scrollToHash);
     return () => window.removeEventListener("hashchange", scrollToHash);
   }, []);
+
+  useEffect(() => {
+    if (!shouldScrollToCcaaHighlightRef.current) return;
+    shouldScrollToCcaaHighlightRef.current = false;
+    window.requestAnimationFrame(() => {
+      ccaaHighlightRef.current?.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    });
+  }, [selectedCcaa, reduceMotion]);
 
   return (
     <main>
@@ -132,6 +150,9 @@ function App() {
           <div className="hero-actions">
             <a className="button primary" href="#datos">
               Ver el cálculo <ArrowDown size={18} />
+            </a>
+            <a className="button urgent" href="infografia.html">
+              Infografía rápida <ExternalLink size={18} />
             </a>
             <a className="button ghost" href="#descargas">
               Descargar dossier <Download size={18} />
@@ -359,7 +380,7 @@ function App() {
         <div className="controls-row">
           <label>
             Comunidad autónoma
-            <select value={selectedCcaa} onChange={(event) => setSelectedCcaa(event.target.value)}>
+            <select value={selectedCcaa} onChange={(event) => selectCcaa(event.target.value)}>
               {ccaaRows.map((row) => (
                 <option key={row.ccaa} value={row.ccaa}>
                   {row.ccaa}
@@ -380,23 +401,25 @@ function App() {
           </div>
         </div>
 
-        <SpotlightPanel className="ccaa-highlight panel">
-          <div>
-            <h3>{selected.ccaa} · {current.year}</h3>
-            <p>
-              Sin guardias: <strong>{eur(selectedBase)} € brutos/mes</strong>. Con 80 h de guardia:
-              {" "}<strong>{eur(selectedGross)} € brutos/mes</strong>.
-            </p>
-            <p className="hourly">
-              Neto estimado por hora real: <strong>{eur(selectedHourly, 2)} €/h</strong>
-            </p>
-          </div>
-          <div className="mini-stats">
-            <span>Guardia laboral: {eur(selected.guardHours[yearIndex][0], 2)} €/h</span>
-            <span>Festivo: {eur(selected.guardHours[yearIndex][1], 2)} €/h</span>
-            <span>Especial: {eur(selected.guardHours[yearIndex][2], 2)} €/h</span>
-          </div>
-        </SpotlightPanel>
+        <div className="ccaa-highlight-target" ref={ccaaHighlightRef}>
+          <SpotlightPanel className="ccaa-highlight panel">
+            <div>
+              <h3>{selected.ccaa} · {current.year}</h3>
+              <p>
+                Sin guardias: <strong>{eur(selectedBase)} € brutos/mes</strong>. Con 80 h de guardia:
+                {" "}<strong>{eur(selectedGross)} € brutos/mes</strong>.
+              </p>
+              <p className="hourly">
+                Neto estimado por hora real: <strong>{eur(selectedHourly, 2)} €/h</strong>
+              </p>
+            </div>
+            <div className="mini-stats">
+              <span>Guardia laboral: {eur(selected.guardHours[yearIndex][0], 2)} €/h</span>
+              <span>Festivo: {eur(selected.guardHours[yearIndex][1], 2)} €/h</span>
+              <span>Especial: {eur(selected.guardHours[yearIndex][2], 2)} €/h</span>
+            </div>
+          </SpotlightPanel>
+        </div>
 
         <div className="bars-list">
           {sortedRows.map((row) => (
@@ -405,7 +428,7 @@ function App() {
               row={row}
               yearIndex={yearIndex}
               selected={row.ccaa === selectedCcaa}
-              onClick={() => setSelectedCcaa(row.ccaa)}
+              onClick={() => selectCcaa(row.ccaa, true)}
               reduceMotion={reduceMotion}
             />
           ))}
