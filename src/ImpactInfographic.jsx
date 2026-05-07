@@ -29,7 +29,7 @@ export function ImpactInfographic() {
           <span>Respuesta rápida a la tabla del CSIF</span>
           <strong>
             Datos SIMEG/CTO 2026 · escenario con {GUARD_HOURS} h/mes extra de guardia
-            {" "}({eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de media)
+            {" "}({eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de media adicionales a la jornada ordinaria)
           </strong>
         </div>
 
@@ -111,7 +111,8 @@ export function ImpactInfographic() {
             <strong>+{GUARD_HOURS} h/mes</strong>
             <small>
               se suman a la jornada ordinaria y equivalen a +{eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de
-              media: un {eur(guardExtraPct, 0)}% extra; además, no computa para la jubilación.
+              media adicionales a la jornada ordinaria: un {eur(guardExtraPct, 0)}% extra; además, no computa
+              para la jubilación.
             </small>
           </div>
           <div className="impact-stat">

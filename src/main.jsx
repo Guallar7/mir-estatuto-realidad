@@ -168,8 +168,8 @@ function App() {
             >
               El cartel que presume de sueldos MIR esconde la clave: para llegar a esas cifras hay que sumar
               a la jornada ordinaria unas <strong>80 horas mensuales adicionales de guardia</strong>,
-              equivalentes a {eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de media. Y eso sin contar la
-              actividad formativa extra.
+              equivalentes a {eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de media adicionales a la jornada
+              ordinaria. Y eso sin contar la actividad formativa extra.
             </Motion.p>
             <div className="hero-actions">
               <a className="button primary" href="#datos">
@@ -328,7 +328,8 @@ function App() {
             </div>
             <div className="calc-row danger">
               <span>
-                Guardias extra del cartel: +{eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de media
+                Guardias extra del cartel: +{eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de media adicionales
+                a la jornada ordinaria
               </span>
               <strong>+{GUARD_HOURS} h/mes</strong>
             </div>
@@ -389,8 +390,9 @@ function App() {
               Usamos {ORDINARY_WEEKLY_HOURS} h/semana anualizadas como referencia principal:
               {" "}{eur(ORDINARY_HOURS, 1)} h/mes. El escenario del cartel añade, por encima de esa jornada,
               {GUARD_HOURS} h/mes de guardias, equivalentes a {eur(GUARD_WEEKLY_EQUIVALENT, 1)} h/semana de
-              media. Resultado: {eur(TOTAL_HOURS, 1)} h/mes, o {eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana de
-              media, sin convertir en horas de cálculo todo el trabajo formativo no retribuido que queda fuera.
+              media adicionales a la jornada ordinaria. Resultado: {eur(TOTAL_HOURS, 1)} h/mes, o{" "}
+              {eur(TOTAL_WEEKLY_EQUIVALENT, 1)} h/semana de media, sin convertir en horas de cálculo todo el
+              trabajo formativo no retribuido que queda fuera.
             </p>
           </div>
 
