@@ -308,8 +308,8 @@ export const estatutoIssues = [
     title: "Falacia 3: 45 horas semanales resuelven la sobrecarga",
     claim: "La jornada máxima conjunta se fija en 45 h/semana de promedio.",
     answer:
-      "El promedio cuatrimestral puede ocultar picos de sobrecarga. Además, una cifra conjunta no corrige que la jornada ordinaria y las guardias se mezclen en la organización real ni que haya salidas tarde, estudio y trabajo formativo no registrado.",
-    refs: ["Anteproyecto art. 84", "SIMEG 2026"],
+      "El promedio cuatrimestral puede ocultar picos de sobrecarga. Además, el propio texto permite superar la duración máxima conjunta si hay razones organizativas o asistenciales, con consentimiento individual escrito y hasta 150 horas/año adicionales. Sobre el papel no es un cheque en blanco; en un sistema con déficit estructural, esa excepción es exactamente donde se juega la realidad.",
+    refs: ["Anteproyecto arts. 84, 97 y 98", "SIMEG 2026"],
   },
   {
     title: "Falacia 4: hay acuerdo sindical, por tanto hay acuerdo sanitario",
