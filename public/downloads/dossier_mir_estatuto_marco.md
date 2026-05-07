@@ -8,6 +8,8 @@ El cartel presenta como `sueldo mensual` unas cifras que incorporan guardias. Es
 
 Nota metodológica: las medias del resumen usan la fila `Media de España` publicada en la tabla SIMEG/CTO; la tabla por CCAA separa la parte ordinaria y la parte atribuible a guardias. Para el cálculo por hora se usa 35 h/semana anualizadas: `35 x 52 / 12 = 151,7 h/mes`. Sumando 80 h de guardia, el divisor principal es `231,7 h/mes`. Si una CCAA aplica 37,5 h/semana o un cómputo anual superior, el divisor sube a `242,5 h/mes` y el salario neto por hora baja.
 
+Comentario metodológico adicional: no se han añadido horas estimadas de estudio ni formación al cálculo principal. Eso no significa que no existan. Muchos residentes dedican buena parte de sus tardes a estudiar, preparar sesiones, realizar postgrados o másteres, doctorado, asistir a congresos, investigar y publicar. Ese trabajo formativo suele no estar retribuido y, en no pocos casos, implica costes directos para el propio residente.
+
 ## Cifras clave
 
 | Concepto | R1 media | R5 media |
@@ -60,7 +62,7 @@ Nota metodológica: las medias del resumen usan la fila `Media de España` publi
 
 ## Respuesta breve para redes o asamblea
 
-> El cartel de CSIF no muestra el sueldo normal de un MIR: suma unas 80 horas mensuales de guardias. Un R1 medio no pasa de 1.447 € brutos sin guardias; la cifra de 2.087 € netos sale de trabajar unas 231,7 h/mes si usamos 35 h/semana anualizadas. Eso deja la media R1 en torno a 9,0 € netos/h antes de contar estudio, sesiones, investigación y salidas tarde. Si el cómputo ordinario aplicable es de 37,5 h/semana, baja a 8,6 € netos/h.
+> El cartel de CSIF no muestra el sueldo normal de un MIR: suma unas 80 horas mensuales de guardias. Un R1 medio no pasa de 1.447 € brutos sin guardias; la cifra de 2.087 € netos sale de trabajar unas 231,7 h/mes si usamos 35 h/semana anualizadas. Eso deja la media R1 en torno a 9,0 € netos/h antes de contar estudio, sesiones, postgrados, congresos, investigación, publicaciones y salidas tarde. Si el cómputo ordinario aplicable es de 37,5 h/semana, baja a 8,6 € netos/h.
 
 ## Fuentes
 

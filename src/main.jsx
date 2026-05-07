@@ -227,10 +227,11 @@ function App() {
               <strong>{eur(TOTAL_HOURS, 1)} h/mes</strong>
             </div>
             <p className="calc-note">
-              Es un denominador conservador y anualizado: 35 h x 52 semanas / 12 meses. No se han sumado aquí
-              las horas reales de estudio, sesiones, congresos, másteres, investigación o formación postgrado
-              que existen por encima de la jornada. Si se aplica 37,5 h/semana, el divisor sube a{" "}
-              {eur(HOURS_37_5_MODEL, 1)} h/mes y el €/h baja.
+              Es un denominador conservador y anualizado: 35 h x 52 semanas / 12 meses. No entra en este
+              cálculo el tiempo que muchos residentes dedican por las tardes a estudiar, preparar sesiones,
+              hacer postgrados o másteres, doctorado, congresos, investigación y publicaciones. Ese trabajo
+              formativo suele no estar retribuido y, con frecuencia, además cuesta dinero al propio residente.
+              Si se aplica 37,5 h/semana, el divisor sube a {eur(HOURS_37_5_MODEL, 1)} h/mes y el €/h baja.
             </p>
           </SpotlightPanel>
 
@@ -271,7 +272,7 @@ function App() {
             <p>
               Usamos 35 h/semana anualizadas como referencia principal: {eur(ORDINARY_HOURS, 1)} h/mes.
               El escenario del cartel añade 80 h/mes de guardias. Resultado: {eur(TOTAL_HOURS, 1)} h/mes
-              antes de contar formación fuera de jornada.
+              sin convertir en horas de cálculo todo el trabajo formativo no retribuido que queda fuera.
             </p>
           </div>
 
@@ -308,8 +309,8 @@ function App() {
             <strong>{eur(currentHourly, 2)} €/h netos</strong>
             <small>
               Media nacional {current.year}: {eur(current.netWithGuards)} € netos/mes con 80 h de guardia /
-              {eur(TOTAL_HOURS, 1)} h reales. La formación no registrada va por encima y no está incluida en
-              este divisor.
+              {eur(TOTAL_HOURS, 1)} h reales. Estudio, sesiones, congresos, postgrados, doctorado,
+              investigación y publicaciones van por encima y no están incluidos en este divisor.
             </small>
           </div>
         </SpotlightPanel>

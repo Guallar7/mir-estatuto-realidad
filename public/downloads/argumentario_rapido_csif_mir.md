@@ -8,6 +8,10 @@ El cartel no muestra el sueldo normal de un MIR: mezcla sueldo ordinario con una
 
 No es correcto decir que “los MIR cobran 2.000-3.000 euros” sin explicar las horas. Esas cifras incluyen unas 80 horas de guardia al mes. Con jornada ordinaria anualizada de 35 h/semana, eso son unas 231,7 h/mes trabajadas. En un R1 medio, 2.087 euros netos entre esas horas son unos 9,0 euros netos/hora, antes de contar estudio, sesiones, investigación, cursos y salidas tarde. Si el cómputo aplicable es 37,5 h/semana, el divisor sube a 242,5 h/mes y el R1 baja a 8,6 euros netos/hora.
 
+## Lo que ni siquiera entra en el cálculo
+
+No se han sumado horas estimadas de estudio ni formación para inflar el denominador. Pero existen: muchos residentes pasan buena parte de las tardes estudiando, preparando sesiones, haciendo postgrados o másteres, doctorado, congresos, investigación y publicaciones. Ese trabajo no suele estar retribuido y, en bastantes casos, implica costes directos para el propio residente.
+
 ## Tres preguntas para desmontar la tabla
 
 1. ¿Cuánto es sueldo ordinario sin guardias?
