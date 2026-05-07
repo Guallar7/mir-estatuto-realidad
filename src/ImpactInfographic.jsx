@@ -51,7 +51,8 @@ export function ImpactInfographic() {
             <span>Qué omite</span>
             <p>
               La cifra llamativa no es sueldo ordinario: incluye guardias. Sin enseñar las horas, la tabla
-              convierte noches, fines de semana y festivos en una supuesta nómina normal.
+              convierte noches, fines de semana y festivos en una supuesta nómina normal y normaliza una
+              jornada extraordinaria estructural.
             </p>
           </div>
           <a className="context-link" href="evidence/csif-tabla.jpeg" target="_blank" rel="noreferrer">
@@ -100,7 +101,10 @@ export function ImpactInfographic() {
             <Clock3 aria-hidden="true" />
             <span>Guardias mensuales</span>
             <strong>+{GUARD_HOURS} h</strong>
-            <small>un {eur(guardExtraPct, 0)}% extra sobre la jornada ordinaria anualizada</small>
+            <small>
+              un {eur(guardExtraPct, 0)}% extra sobre la jornada ordinaria anualizada; además, no computa para
+              la jubilación.
+            </small>
           </div>
           <div className="impact-stat">
             <BadgeEuro aria-hidden="true" />
