@@ -13,6 +13,7 @@ export const summaryByYear = [
   {
     year: "R1",
     grossNoGuards: 1447,
+    netNoGuards: 1225,
     netWithGuards: 2087,
     grossWithGuards: 2806,
     guardShare: 0.484,
@@ -41,6 +42,7 @@ export const summaryByYear = [
   {
     year: "R5",
     grossNoGuards: 1973,
+    netNoGuards: 1531,
     netWithGuards: 2758,
     grossWithGuards: 3929,
     guardShare: 0.498,

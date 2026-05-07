@@ -17,9 +17,11 @@ import {
   ExternalLink,
   FileWarning,
   HeartPulse,
+  Music2,
   Scale,
   ShieldAlert,
   Stethoscope,
+  X,
 } from "lucide-react";
 import {
   ccaaRows,
@@ -52,6 +54,7 @@ function App() {
   const [yearIndex, setYearIndex] = useState(0);
   const [selectedCcaa, setSelectedCcaa] = useState("Madrid");
   const [expandedIssue, setExpandedIssue] = useState(0);
+  const [csifLightboxOpen, setCsifLightboxOpen] = useState(false);
   const [sortMode, setSortMode] = useState("guardias");
   const ccaaHighlightRef = useRef(null);
   const shouldScrollToCcaaHighlightRef = useRef(false);
@@ -110,6 +113,20 @@ function App() {
     });
   }, [selectedCcaa, reduceMotion]);
 
+  useEffect(() => {
+    if (!csifLightboxOpen) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setCsifLightboxOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [csifLightboxOpen]);
+
   return (
     <main>
       <Motion.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />
@@ -121,44 +138,128 @@ function App() {
           <a href="#fuentes">Fuentes</a>
         </nav>
 
-        <div className="hero-inner">
-          <Motion.div
-            className="eyebrow"
-            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={reduceMotion ? { duration: 0 } : { duration: 0.5 }}
-          >
-            <Stethoscope size={18} />
-            Medicina no se defiende con propaganda. Se defiende con datos.
-          </Motion.div>
-          <Motion.h1
-            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={reduceMotion ? { duration: 0 } : { duration: 0.55, delay: 0.08 }}
-          >
-            No es sueldo. Son guardias.
-          </Motion.h1>
-          <Motion.p
-            className="lead"
-            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={reduceMotion ? { duration: 0 } : { duration: 0.55, delay: 0.16 }}
-          >
-            El cartel que presume de sueldos MIR esconde la clave: para llegar a esas cifras hay que sumar
-            unas <strong>80 horas mensuales</strong> de tardes, noches, fines de semana y festivos.
-          </Motion.p>
-          <div className="hero-actions">
-            <a className="button primary" href="#datos">
-              Ver el cálculo <ArrowDown size={18} />
-            </a>
-            <a className="button urgent" href="infografia.html">
-              Infografía rápida <ExternalLink size={18} />
-            </a>
-            <a className="button ghost" href="#descargas">
-              Descargar dossier <Download size={18} />
-            </a>
+        <div className="hero-main">
+          <div className="hero-inner">
+            <Motion.div
+              className="eyebrow"
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.5 }}
+            >
+              <Stethoscope size={18} />
+              Medicina no se defiende con propaganda. Se defiende con datos.
+            </Motion.div>
+            <Motion.h1
+              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.55, delay: 0.08 }}
+            >
+              No es sueldo. Son guardias.
+            </Motion.h1>
+            <Motion.p
+              className="lead"
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.55, delay: 0.16 }}
+            >
+              El cartel que presume de sueldos MIR esconde la clave: para llegar a esas cifras hay que sumar
+              unas <strong>80 horas mensuales</strong> de tardes, noches, fines de semana y festivos.
+            </Motion.p>
+            <div className="hero-actions">
+              <a className="button primary" href="#datos">
+                Ver el cálculo <ArrowDown size={18} />
+              </a>
+              <a className="button urgent" href="infografia.html">
+                Infografía rápida <ExternalLink size={18} />
+              </a>
+              <a className="button ghost" href="#descargas">
+                Descargar dossier <Download size={18} />
+              </a>
+              <a
+                className="button song"
+                href="https://suno.com/song/94021510-25f0-453a-baed-8d8117c1cd64"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Canción de la huelga <Music2 size={18} />
+              </a>
+            </div>
           </div>
+
+          <aside className="hero-csif-card" aria-label="Cartel del CSIF al que responde esta web">
+            <span>El cartel que se responde</span>
+            <figure>
+              <button
+                className="hero-csif-image-button"
+                type="button"
+                onClick={() => setCsifLightboxOpen(true)}
+                aria-label="Ampliar el cartel del CSIF"
+              >
+                <img
+                  src="evidence/csif-tabla.jpeg"
+                  alt="Cartel del CSIF con una tabla de supuestos sueldos MIR por comunidad autonoma."
+                />
+              </button>
+              <figcaption>La cifra llama la atención. Las horas, curiosamente, no salen en grande.</figcaption>
+            </figure>
+          </aside>
         </div>
+
+        <details className="hero-csif-accordion">
+          <summary>Ver el cartel del CSIF que estamos contestando</summary>
+          <figure>
+            <button
+              className="hero-csif-image-button"
+              type="button"
+              onClick={() => setCsifLightboxOpen(true)}
+              aria-label="Ampliar el cartel del CSIF"
+            >
+              <img
+                src="evidence/csif-tabla.jpeg"
+                alt="Cartel del CSIF con una tabla de supuestos sueldos MIR por comunidad autonoma."
+                loading="lazy"
+              />
+            </button>
+            <figcaption>Se muestra para contextualizar la respuesta: importes sin enseñar la jornada real.</figcaption>
+          </figure>
+        </details>
+
+        <AnimatePresence>
+          {csifLightboxOpen && (
+            <Motion.div
+              className="image-lightbox"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Cartel del CSIF ampliado"
+              initial={reduceMotion ? false : { opacity: 0 }}
+              animate={reduceMotion ? undefined : { opacity: 1 }}
+              exit={reduceMotion ? undefined : { opacity: 0 }}
+              onClick={(event) => {
+                if (event.target === event.currentTarget) setCsifLightboxOpen(false);
+              }}
+            >
+              <Motion.div
+                className="image-lightbox-content"
+                initial={reduceMotion ? false : { opacity: 0, scale: 0.96, y: 12 }}
+                animate={reduceMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
+                exit={reduceMotion ? undefined : { opacity: 0, scale: 0.96, y: 12 }}
+              >
+                <button
+                  className="image-lightbox-close"
+                  type="button"
+                  onClick={() => setCsifLightboxOpen(false)}
+                  aria-label="Cerrar cartel ampliado"
+                >
+                  <X size={22} />
+                </button>
+                <img
+                  src="evidence/csif-tabla.jpeg"
+                  alt="Cartel del CSIF con una tabla de supuestos sueldos MIR por comunidad autonoma."
+                />
+              </Motion.div>
+            </Motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="hero-metrics" aria-label="Comparación R1 y R5 con guardias">
           <BaseMetricCard data={summaryByYear[0]} />
@@ -494,6 +595,7 @@ function BaseMetricCard({ data }) {
       <span>{data.year} medio sin guardias</span>
       <strong>{eur(data.grossNoGuards)} €</strong>
       <small>brutos/mes</small>
+      {data.netNoGuards ? <em>≈ {eur(data.netNoGuards)} € netos/mes</em> : null}
     </Motion.div>
   );
 }
