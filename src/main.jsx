@@ -1,6 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
+  AnimatePresence,
+  LayoutGroup,
+  motion as Motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+} from "framer-motion";
+import {
   ArrowDown,
   BadgeEuro,
   BookOpenCheck,
@@ -21,6 +29,7 @@ import {
   sources,
   summaryByYear,
 } from "./data";
+import { cn } from "./utils";
 import "./styles.css";
 
 const ORDINARY_HOURS = 162.5;
@@ -51,6 +60,10 @@ function App() {
   const selectedGross = selected.withGuardsGross[yearIndex];
   const selectedBase = selected.base[yearIndex];
   const selectedHourly = selectedNet / (includeTraining ? TRAINING_TOTAL_HOURS : TOTAL_HOURS);
+  const { scrollYProgress } = useScroll();
+  const smoothScaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 24, restDelta: 0.001 });
+  const reduceMotion = useReducedMotion();
+  const scaleX = reduceMotion ? scrollYProgress : smoothScaleX;
 
   const sortedRows = useMemo(() => {
     const rows = [...ccaaRows];
@@ -80,6 +93,7 @@ function App() {
 
   return (
     <main>
+      <Motion.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />
       <section className="hero" id="inicio">
         <nav className="nav" aria-label="Secciones">
           <a href="#datos">Datos</a>
@@ -89,15 +103,31 @@ function App() {
         </nav>
 
         <div className="hero-inner">
-          <div className="eyebrow">
+          <Motion.div
+            className="eyebrow"
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.5 }}
+          >
             <Stethoscope size={18} />
             Medicina no se defiende con propaganda. Se defiende con datos.
-          </div>
-          <h1>No es sueldo. Son guardias.</h1>
-          <p className="lead">
+          </Motion.div>
+          <Motion.h1
+            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.55, delay: 0.08 }}
+          >
+            No es sueldo. Son guardias.
+          </Motion.h1>
+          <Motion.p
+            className="lead"
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.55, delay: 0.16 }}
+          >
             El cartel que presume de sueldos MIR esconde la clave: para llegar a esas cifras hay que sumar
             unas <strong>80 horas mensuales</strong> de tardes, noches, fines de semana y festivos.
-          </p>
+          </Motion.p>
           <div className="hero-actions">
             <a className="button primary" href="#datos">
               Ver el cálculo <ArrowDown size={18} />
@@ -115,7 +145,7 @@ function App() {
         </div>
       </section>
 
-      <section className="section" id="datos">
+      <RevealSection className="section" id="datos">
         <div className="section-heading">
           <span className="kicker">El cálculo que falta</span>
           <h2>Cuando metes las horas, el relato se cae.</h2>
@@ -125,10 +155,10 @@ function App() {
           </p>
         </div>
 
-        <YearSelector yearIndex={yearIndex} setYearIndex={setYearIndex} />
+        <YearSelector yearIndex={yearIndex} setYearIndex={setYearIndex} reduceMotion={reduceMotion} />
 
         <div className="calc-grid">
-          <div className="panel calculation">
+          <SpotlightPanel className="panel calculation">
             <div className="calc-row">
               <span>Jornada ordinaria</span>
               <strong>{eur(ORDINARY_HOURS, 1)} h/mes</strong>
@@ -156,9 +186,9 @@ function App() {
               />
               Incluir 5 h/semana de estudio, sesiones, investigación o cursos
             </label>
-          </div>
+          </SpotlightPanel>
 
-          <div className="panel result-card">
+          <SpotlightPanel className="panel result-card">
             <BadgeEuro size={32} />
             <p>Media {current.year} con el escenario del cartel</p>
             <strong>{eur(current.netWithGuards)} € netos/mes</strong>
@@ -166,10 +196,10 @@ function App() {
               equivale a{" "}
               <b>{eur(includeTraining ? current.realNetHourWithTraining : current.realNetHour, 2)} €/h netos</b>
             </span>
-          </div>
+          </SpotlightPanel>
         </div>
 
-        <div className="stacked-card">
+        <SpotlightPanel className="stacked-card">
           <div>
             <h3>{current.year}: de dónde sale el bruto</h3>
             <p>
@@ -177,11 +207,16 @@ function App() {
               privilegio, es tiempo adicional y penoso sosteniendo la asistencia.
             </p>
           </div>
-          <StackedBar base={current.grossNoGuards} total={current.grossWithGuards} label={`Media ${current.year}`} />
-        </div>
-      </section>
+          <StackedBar
+            base={current.grossNoGuards}
+            total={current.grossWithGuards}
+            label={`Media ${current.year}`}
+            reduceMotion={reduceMotion}
+          />
+        </SpotlightPanel>
+      </RevealSection>
 
-      <section className="section dark" id="estatuto">
+      <RevealSection className="section dark" id="estatuto">
         <div className="section-heading">
           <span className="kicker">Anteproyecto de Estatuto Marco</span>
           <h2>No mejora lo esencial: normaliza la excepción.</h2>
@@ -198,9 +233,11 @@ function App() {
           <Principle icon={<HeartPulse />} title="Seguridad clínica" text="La fatiga no es vocación. Cuidar al paciente exige cuidar a quien decide y atiende." />
         </div>
 
+        <LayoutGroup>
         <div className="issues">
           {estatutoIssues.map((issue, index) => (
-            <button
+            <Motion.button
+              layout={reduceMotion ? false : true}
               className={`issue ${expandedIssue === index ? "open" : ""}`}
               key={issue.title}
               aria-expanded={expandedIssue === index}
@@ -210,18 +247,28 @@ function App() {
             >
               <span className="issue-title">{issue.title}</span>
               <span className="claim">{issue.claim}</span>
-              {expandedIssue === index && (
-                <span className="answer" id={`issue-answer-${index}`}>
-                  {issue.answer}
-                  <small>{issue.refs.join(" · ")}</small>
-                </span>
-              )}
-            </button>
+              <AnimatePresence initial={false}>
+                {expandedIssue === index && (
+                  <Motion.span
+                    className="answer"
+                    id={`issue-answer-${index}`}
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={reduceMotion ? { duration: 0 } : { duration: 0.22 }}
+                  >
+                    {issue.answer}
+                    <small>{issue.refs.join(" · ")}</small>
+                  </Motion.span>
+                )}
+              </AnimatePresence>
+            </Motion.button>
           ))}
         </div>
-      </section>
+        </LayoutGroup>
+      </RevealSection>
 
-      <section className="section" id="ccaa">
+      <RevealSection className="section" id="ccaa">
         <div className="section-heading">
           <span className="kicker">Tu comunidad</span>
           <h2>Compara salario ordinario y guardias.</h2>
@@ -255,7 +302,7 @@ function App() {
           </div>
         </div>
 
-        <div className="ccaa-highlight panel">
+        <SpotlightPanel className="ccaa-highlight panel">
           <div>
             <h3>{selected.ccaa} · {current.year}</h3>
             <p>
@@ -271,7 +318,7 @@ function App() {
             <span>Festivo: {eur(selected.guardHours[yearIndex][1], 2)} €/h</span>
             <span>Especial: {eur(selected.guardHours[yearIndex][2], 2)} €/h</span>
           </div>
-        </div>
+        </SpotlightPanel>
 
         <div className="bars-list">
           {sortedRows.map((row) => (
@@ -281,12 +328,13 @@ function App() {
               yearIndex={yearIndex}
               selected={row.ccaa === selectedCcaa}
               onClick={() => setSelectedCcaa(row.ccaa)}
+              reduceMotion={reduceMotion}
             />
           ))}
         </div>
-      </section>
+      </RevealSection>
 
-      <section className="section soft">
+      <RevealSection className="section soft">
         <div className="section-heading">
           <span className="kicker">Lo que exigimos</span>
           <h2>Un estatuto propio no es corporativismo. Es seguridad del paciente.</h2>
@@ -296,9 +344,9 @@ function App() {
           <Demand icon={<BookOpenCheck />} title="Formación protegida" text="La residencia no puede ser mano de obra barata con formación a costa del tiempo personal." />
           <Demand icon={<FileWarning />} title="Datos honestos" text="Toda tabla pública debe separar sueldo ordinario, guardias, complementos, horas y neto estimado." />
         </div>
-      </section>
+      </RevealSection>
 
-      <section className="section" id="fuentes">
+      <RevealSection className="section" id="fuentes">
         <div className="section-heading">
           <span className="kicker">Auditable</span>
           <h2>Fuentes y descargas.</h2>
@@ -322,7 +370,7 @@ function App() {
             </a>
           ))}
         </div>
-      </section>
+      </RevealSection>
 
       <footer>
         <strong>La sanidad pública no se sostiene culpando a sus residentes.</strong>
@@ -333,34 +381,43 @@ function App() {
 }
 
 function MetricCard({ label, value, detail, tone = "green" }) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <div className={`metric ${tone}`}>
+    <Motion.div
+      className={`metric ${tone}`}
+      whileHover={reduceMotion ? undefined : { y: -4, scale: 1.01 }}
+      transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 20 }}
+    >
       <span>{label}</span>
       <strong>{value}</strong>
       <small>{detail}</small>
-    </div>
+    </Motion.div>
   );
 }
 
-function YearSelector({ yearIndex, setYearIndex }) {
+function YearSelector({ yearIndex, setYearIndex, reduceMotion }) {
   return (
+    <LayoutGroup>
     <div className="year-selector" role="group" aria-label="Año de residencia">
       {residenceYears.map((year, index) => (
         <button
-          className={yearIndex === index ? "active" : ""}
+          className={cn(yearIndex === index && "active")}
           key={year}
           aria-pressed={yearIndex === index}
           onClick={() => setYearIndex(index)}
           type="button"
         >
-          {year}
+          {yearIndex === index && <Motion.span className="active-pill" layoutId={reduceMotion ? undefined : "year-pill"} />}
+          <span className="button-label">{year}</span>
         </button>
       ))}
     </div>
+    </LayoutGroup>
   );
 }
 
-function StackedBar({ base, total, label }) {
+function StackedBar({ base, total, label, reduceMotion }) {
   const guard = total - base;
   const basePct = (base / total) * 100;
   return (
@@ -370,8 +427,20 @@ function StackedBar({ base, total, label }) {
         <strong>{eur(total)} € brutos/mes</strong>
       </div>
       <div className="stacked-track">
-        <span className="base" style={{ width: `${basePct}%` }} />
-        <span className="guard" style={{ width: `${100 - basePct}%` }} />
+        <Motion.span
+          className="base"
+          initial={reduceMotion ? { width: `${basePct}%` } : { width: 0 }}
+          whileInView={{ width: `${basePct}%` }}
+          viewport={{ once: true }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.6 }}
+        />
+        <Motion.span
+          className="guard"
+          initial={reduceMotion ? { width: `${100 - basePct}%` } : { width: 0 }}
+          whileInView={{ width: `${100 - basePct}%` }}
+          viewport={{ once: true }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.6, delay: 0.1 }}
+        />
       </div>
       <div className="legend">
         <span><i className="base-dot" /> {eur(base)} € sueldo sin guardias</span>
@@ -401,7 +470,7 @@ function Demand({ icon, title, text }) {
   );
 }
 
-function CompactBar({ row, yearIndex, selected, onClick }) {
+function CompactBar({ row, yearIndex, selected, onClick, reduceMotion }) {
   const base = row.base[yearIndex];
   const total = row.withGuardsGross[yearIndex];
   const guard = total - base;
@@ -410,16 +479,66 @@ function CompactBar({ row, yearIndex, selected, onClick }) {
   const basePct = (base / total) * 100;
 
   return (
-    <button aria-pressed={selected} className={`compact-bar ${selected ? "selected" : ""}`} onClick={onClick} type="button">
+    <Motion.button
+      aria-pressed={selected}
+      className={`compact-bar ${selected ? "selected" : ""}`}
+      onClick={onClick}
+      type="button"
+      layout={reduceMotion ? false : true}
+      whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+    >
       <span className="name">{row.ccaa}</span>
       <span className="bar" style={{ width: `${totalPct}%` }}>
-        <i className="base-part" style={{ width: `${basePct}%` }} />
-        <i className="guard-part" style={{ width: `${100 - basePct}%` }} />
+        <Motion.i
+          className="base-part"
+          initial={reduceMotion ? { width: `${basePct}%` } : { width: 0 }}
+          whileInView={{ width: `${basePct}%` }}
+          viewport={{ once: true }}
+          transition={reduceMotion ? { duration: 0 } : undefined}
+        />
+        <Motion.i
+          className="guard-part"
+          initial={reduceMotion ? { width: `${100 - basePct}%` } : { width: 0 }}
+          whileInView={{ width: `${100 - basePct}%` }}
+          viewport={{ once: true }}
+          transition={reduceMotion ? { duration: 0 } : undefined}
+        />
       </span>
       <span className="amounts">
         {eur(base)} + {eur(guard)} = <b>{eur(total)} €</b>
       </span>
-    </button>
+    </Motion.button>
+  );
+}
+
+function RevealSection({ children, className, id }) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <Motion.section
+      className={className}
+      id={id}
+      initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={reduceMotion ? { duration: 0 } : { duration: 0.5 }}
+    >
+      {children}
+    </Motion.section>
+  );
+}
+
+function SpotlightPanel({ children, className }) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <Motion.div
+      className={cn("spotlight", className)}
+      whileHover={reduceMotion ? undefined : { y: -3 }}
+      transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 280, damping: 24 }}
+    >
+      {children}
+    </Motion.div>
   );
 }
 
