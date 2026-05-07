@@ -344,11 +344,14 @@ function App() {
               No estamos usando mensual y semanal como si fueran intercambiables: mensual sirve para dividir
               el sueldo mensual, y semanal sirve para entender la carga de trabajo frente a los límites de
               jornada. Las 80 h/mes de guardia no sustituyen la jornada ordinaria: se suman encima. El
-              denominador es conservador y anualizado: {ORDINARY_WEEKLY_HOURS} h x 52 semanas / 12 meses. No
-              entra en este cálculo el tiempo que muchos residentes dedican por las tardes a estudiar,
-              preparar sesiones, hacer postgrados o másteres, doctorado, congresos, investigación y
-              publicaciones. Si se aplica 37,5 h/semana, el divisor sube a {eur(HOURS_37_5_MODEL, 1)} h/mes
-              ({eur(HOURS_37_5_WEEKLY_MODEL, 1)} h/semana de media) y el €/h baja.
+              denominador es conservador y anualizado: {ORDINARY_WEEKLY_HOURS} h x 52 semanas / 12 meses.{" "}
+              <strong>
+                No entra en este cálculo el tiempo que muchos residentes dedican por las tardes a estudiar,
+                preparar sesiones, hacer postgrados o másteres, doctorado, congresos, investigación y
+                publicaciones.
+              </strong>{" "}
+              Si se aplica 37,5 h/semana, el divisor sube a {eur(HOURS_37_5_MODEL, 1)} h/mes (
+              {eur(HOURS_37_5_WEEKLY_MODEL, 1)} h/semana de media) y el €/h baja.
             </p>
           </SpotlightPanel>
 
