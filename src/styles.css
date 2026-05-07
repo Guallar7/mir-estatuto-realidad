@@ -602,6 +602,127 @@ h2 {
   background: var(--red);
 }
 
+.hours-compare-card {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.hours-copy h3 {
+  font-size: 1.45rem;
+  margin-bottom: 0.55rem;
+}
+
+.hours-copy p {
+  color: var(--muted);
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+.hours-visual {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.hour-line {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.hour-line-label {
+  align-items: baseline;
+  display: flex;
+  gap: 0.7rem;
+  justify-content: space-between;
+}
+
+.hour-line-label span {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.hour-line-label strong {
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.hour-track {
+  background: #dfe9ee;
+  border-radius: 999px;
+  box-shadow: inset 0 1px 4px rgba(16, 37, 59, 0.15);
+  display: flex;
+  height: 22px;
+  overflow: hidden;
+}
+
+.hour-fill {
+  display: block;
+  min-width: 2px;
+}
+
+.hour-fill.standard {
+  background: var(--blue);
+}
+
+.hour-fill.ordinary {
+  background: var(--green);
+}
+
+.hour-fill.guard {
+  background: var(--red);
+}
+
+.hour-fill.training {
+  background: var(--amber);
+}
+
+.hour-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.hour-summary span,
+.hour-summary strong {
+  background: var(--soft-blue);
+  border-radius: 999px;
+  color: var(--blue);
+  font-size: 0.9rem;
+  font-weight: 900;
+  padding: 0.55rem 0.7rem;
+}
+
+.hour-summary strong {
+  background: #fbe8dc;
+  color: var(--red-dark);
+}
+
+.hour-price {
+  background: linear-gradient(145deg, var(--blue), var(--green-dark));
+  border-radius: 16px;
+  color: white;
+  padding: 1rem;
+}
+
+.hour-price span,
+.hour-price small {
+  color: rgba(255, 255, 255, 0.78);
+  display: block;
+}
+
+.hour-price strong {
+  color: #ffe2ba;
+  display: block;
+  font-size: clamp(2.25rem, 12vw, 4.7rem);
+  line-height: 0.95;
+  margin: 0.35rem 0;
+}
+
+.hour-price small {
+  line-height: 1.45;
+}
+
 .principles,
 .demands {
   display: grid;
@@ -888,7 +1009,10 @@ footer strong {
     justify-content: flex-end;
   }
 
-  .hero-metrics,
+  .hero-metrics {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
   .calc-grid,
   .principles,
   .demands {
@@ -903,6 +1027,15 @@ footer strong {
   .controls-row,
   .ccaa-highlight {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .hours-compare-card {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.25fr);
+  }
+
+  .hour-summary,
+  .hour-price {
+    grid-column: 1 / -1;
   }
 
   .csif-response {

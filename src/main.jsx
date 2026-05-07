@@ -60,6 +60,8 @@ function App() {
   const selectedGross = selected.withGuardsGross[yearIndex];
   const selectedBase = selected.base[yearIndex];
   const selectedHourly = selectedNet / (includeTraining ? TRAINING_TOTAL_HOURS : TOTAL_HOURS);
+  const displayedHourly = includeTraining ? current.realNetHourWithTraining : current.realNetHour;
+  const hoursScale = includeTraining ? TRAINING_TOTAL_HOURS : TOTAL_HOURS;
   const { scrollYProgress } = useScroll();
   const smoothScaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 24, restDelta: 0.001 });
   const reduceMotion = useReducedMotion();
@@ -142,6 +144,7 @@ function App() {
           <MetricCard label={`${current.year} medio sin guardias`} value={`${eur(current.grossNoGuards)} €`} detail="brutos/mes" />
           <MetricCard label={`${current.year} con 80 h de guardia`} value={`${eur(current.netWithGuards)} €`} detail="netos/mes" tone="red" />
           <MetricCard label="Horas reales mínimas" value={`${eur(TOTAL_HOURS, 1)} h`} detail="al mes" tone="amber" />
+          <MetricCard label={`${current.year} precio real medio`} value={`${eur(current.realNetHour, 2)} €`} detail="netos/h" tone="green" />
         </div>
       </section>
 
@@ -179,8 +182,9 @@ function App() {
           <span className="kicker">El cálculo que falta</span>
           <h2>Cuando metes las horas, el relato se cae.</h2>
           <p>
-            Selecciona año de residencia. La cifra central usa la media publicada en SIMEG/CTO con 80 horas
-            mensuales de guardia y la compara con la jornada ordinaria.
+            Selecciona año de residencia. La cifra central usa la media nacional publicada en SIMEG/CTO con
+            80 horas mensuales de guardia. El €/h no es el precio de una guardia concreta: es el neto medio
+            con guardias dividido entre las horas reales trabajadas.
           </p>
         </div>
 
@@ -242,6 +246,69 @@ function App() {
             label={`Media ${current.year}`}
             reduceMotion={reduceMotion}
           />
+        </SpotlightPanel>
+
+        <SpotlightPanel className="hours-compare-card">
+          <div className="hours-copy">
+            <span className="kicker">Horas frente a salario</span>
+            <h3>{current.year}: jornada española frente a jornada MIR real</h3>
+            <p>
+              La jornada completa estándar se aproxima con {eur(ORDINARY_HOURS, 1)} h/mes. El escenario del
+              cartel añade 80 h/mes de guardias. Resultado: {eur(TOTAL_HOURS, 1)} h/mes antes de contar
+              formación fuera de jornada.
+            </p>
+          </div>
+
+          <div className="hours-visual" aria-label="Comparación de horas mensuales">
+            <div className="hour-line">
+              <div className="hour-line-label">
+                <span>Jornada laboral estándar</span>
+                <strong>{eur(ORDINARY_HOURS, 1)} h/mes</strong>
+              </div>
+              <span className="hour-track">
+                <span className="hour-fill standard" style={{ width: `${(ORDINARY_HOURS / hoursScale) * 100}%` }} />
+              </span>
+            </div>
+            <div className="hour-line resident">
+              <div className="hour-line-label">
+                <span>MIR con 80 h de guardia</span>
+                <strong>{eur(TOTAL_HOURS, 1)} h/mes</strong>
+              </div>
+              <span className="hour-track">
+                <span className="hour-fill ordinary" style={{ width: `${(ORDINARY_HOURS / hoursScale) * 100}%` }} />
+                <span className="hour-fill guard" style={{ width: `${(GUARD_HOURS / hoursScale) * 100}%` }} />
+              </span>
+            </div>
+            {includeTraining && (
+              <div className="hour-line training-extra">
+                <div className="hour-line-label">
+                  <span>Con formación no registrada</span>
+                  <strong>{eur(TRAINING_TOTAL_HOURS, 1)} h/mes</strong>
+                </div>
+                <span className="hour-track">
+                  <span className="hour-fill ordinary" style={{ width: `${(ORDINARY_HOURS / hoursScale) * 100}%` }} />
+                  <span className="hour-fill guard" style={{ width: `${(GUARD_HOURS / hoursScale) * 100}%` }} />
+                  <span className="hour-fill training" style={{ width: `${((TRAINING_TOTAL_HOURS - TOTAL_HOURS) / hoursScale) * 100}%` }} />
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div className="hour-summary">
+            <span>{eur(ORDINARY_HOURS, 1)} h ordinarias</span>
+            <span>+ {GUARD_HOURS} h guardias</span>
+            {includeTraining && <span>+ {eur(TRAINING_TOTAL_HOURS - TOTAL_HOURS, 1)} h formación</span>}
+            <strong>= {eur(includeTraining ? TRAINING_TOTAL_HOURS : TOTAL_HOURS, 1)} h/mes</strong>
+          </div>
+
+          <div className="hour-price">
+            <span>Precio medio real empleado</span>
+            <strong>{eur(displayedHourly, 2)} €/h netos</strong>
+            <small>
+              Media nacional {current.year}: {eur(current.netWithGuards)} € netos/mes con 80 h de guardia /
+              {eur(includeTraining ? TRAINING_TOTAL_HOURS : TOTAL_HOURS, 1)} h reales.
+            </small>
+          </div>
         </SpotlightPanel>
       </RevealSection>
 
