@@ -210,6 +210,7 @@ h1 {
   max-width: 1120px;
 }
 
+.summary-metric,
 .rate-metric {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.08));
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -217,6 +218,27 @@ h1 {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
   backdrop-filter: blur(14px);
   padding: 1rem;
+}
+
+.summary-metric span,
+.summary-metric small {
+  color: rgba(255, 255, 255, 0.74);
+  display: block;
+}
+
+.summary-metric span {
+  font-size: 1.08rem;
+}
+
+.summary-metric > strong {
+  display: block;
+  font-size: clamp(3rem, 15vw, 4.85rem);
+  line-height: 0.95;
+  margin: 0.35rem 0 0.15rem;
+}
+
+.summary-metric.hours > strong {
+  color: #ffe2ba;
 }
 
 .rate-head {
@@ -1054,7 +1076,23 @@ footer strong {
   }
 
   .hero-metrics {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .summary-metric {
+    grid-column: span 2;
+  }
+
+  .summary-metric > strong {
+    font-size: clamp(3rem, 6vw, 4rem);
+  }
+
+  .guard-metric {
+    grid-column: span 4;
+  }
+
+  .summary-metric.hours {
+    grid-column: span 6;
   }
 
   .calc-grid,

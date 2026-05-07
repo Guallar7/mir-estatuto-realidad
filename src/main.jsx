@@ -137,8 +137,11 @@ function App() {
         </div>
 
         <div className="hero-metrics" aria-label="Comparación R1 y R5 con guardias">
-          <RateMetricCard data={summaryByYear[0]} />
-          <RateMetricCard data={summaryByYear[4]} />
+          <BaseMetricCard data={summaryByYear[0]} />
+          <GuardRateMetricCard data={summaryByYear[0]} />
+          <HoursMetricCard />
+          <BaseMetricCard data={summaryByYear[4]} />
+          <GuardRateMetricCard data={summaryByYear[4]} />
         </div>
       </section>
 
@@ -447,13 +450,45 @@ function App() {
   );
 }
 
-function RateMetricCard({ data }) {
+function BaseMetricCard({ data }) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <Motion.div
+      className="summary-metric"
+      whileHover={reduceMotion ? undefined : { y: -4, scale: 1.01 }}
+      transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 20 }}
+    >
+      <span>{data.year} medio sin guardias</span>
+      <strong>{eur(data.grossNoGuards)} €</strong>
+      <small>brutos/mes</small>
+    </Motion.div>
+  );
+}
+
+function HoursMetricCard() {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <Motion.div
+      className="summary-metric hours"
+      whileHover={reduceMotion ? undefined : { y: -4, scale: 1.01 }}
+      transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 20 }}
+    >
+      <span>Horas reales mínimas</span>
+      <strong>{eur(TOTAL_HOURS, 1)} h</strong>
+      <small>{eur(ORDINARY_HOURS, 1)} h ordinarias + {GUARD_HOURS} h guardias</small>
+    </Motion.div>
+  );
+}
+
+function GuardRateMetricCard({ data }) {
   const reduceMotion = useReducedMotion();
   const guardGross = data.grossWithGuards - data.grossNoGuards;
 
   return (
     <Motion.div
-      className="rate-metric"
+      className="rate-metric guard-metric"
       whileHover={reduceMotion ? undefined : { y: -4, scale: 1.01 }}
       transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 20 }}
     >
