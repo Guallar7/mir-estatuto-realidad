@@ -540,7 +540,7 @@ function App() {
       <RevealSection className="section soft">
         <div className="section-heading">
           <span className="kicker">Lo que exigimos</span>
-          <h2>Un estatuto propio no es corporativismo. Es seguridad del paciente.</h2>
+          <h2>Un estatuto médico propio no es corporativismo: es tener voz propia para negociar nuestra responsabilidad, nuestras condiciones y nuestros derechos laborales.</h2>
         </div>
         <div className="demands">
           <Demand icon={<ShieldAlert />} title="Guardias reconocidas" text="Que computen como trabajo real, para descanso, jubilación, carrera y cotización." />
