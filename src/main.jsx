@@ -145,6 +145,35 @@ function App() {
         </div>
       </section>
 
+      <section className="section response-section" id="respuesta-csif">
+        <SpotlightPanel className="panel csif-response">
+          <div className="csif-copy">
+            <span className="kicker">Contexto necesario</span>
+            <h2>En respuesta al mensaje descontextualizado del CSIF: información real.</h2>
+            <p>
+              La receta era vistosa: sumar guardias, complementos, noches, festivos y trienios cuando toque;
+              olvidarse del denominador -las horas- y llamar a eso "sueldo". Pequeña magia de hoja de cálculo,
+              hasta que aparece la jornada real.
+            </p>
+          </div>
+
+          <details className="csif-details">
+            <summary>Abrir el cartel del CSIF que estamos contestando</summary>
+            <figure>
+              <img
+                src="evidence/csif-tabla.jpeg"
+                alt="Cartel del CSIF con una tabla de supuestos sueldos MIR por comunidad autonoma."
+                loading="lazy"
+              />
+              <figcaption>
+                Se muestra para contextualizar la respuesta: mezcla sueldo ordinario y guardias, pero no enseña
+                las horas que hacen falta para llegar a esas cifras.
+              </figcaption>
+            </figure>
+          </details>
+        </SpotlightPanel>
+      </section>
+
       <RevealSection className="section" id="datos">
         <div className="section-heading">
           <span className="kicker">El cálculo que falta</span>
