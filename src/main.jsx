@@ -147,7 +147,7 @@ function App() {
               transition={reduceMotion ? { duration: 0 } : { duration: 0.5 }}
             >
               <Stethoscope size={18} />
-              Medicina no se defiende con propaganda. Se defiende con datos.
+              La medicina no se defiende con propaganda. Se defiende con datos.
             </Motion.div>
             <Motion.h1
               initial={reduceMotion ? false : { opacity: 0, y: 18 }}
