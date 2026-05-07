@@ -36,12 +36,16 @@ const ORDINARY_HOURS = 162.5;
 const GUARD_HOURS = 80;
 const TOTAL_HOURS = 242.5;
 const TRAINING_TOTAL_HOURS = 264.2;
+const STANDARD_YEAR_HOURS = 40 * 52;
 
 const eur = (value, digits = 0) =>
   new Intl.NumberFormat("es-ES", {
     maximumFractionDigits: digits,
     minimumFractionDigits: digits,
   }).format(value);
+
+const equivalentYearsAt40h = (monthlyHours, calendarYears) =>
+  (monthlyHours * 12 * calendarYears) / STANDARD_YEAR_HOURS;
 
 function useYearData(yearIndex) {
   return summaryByYear[yearIndex];
@@ -242,6 +246,49 @@ function App() {
             label={`Media ${current.year}`}
             reduceMotion={reduceMotion}
           />
+        </SpotlightPanel>
+      </RevealSection>
+
+      <RevealSection className="section training-section" id="hiperformacion">
+        <div className="section-heading">
+          <span className="kicker">Hiperformación médica</span>
+          <h2>La residencia no son 4 o 5 años normales. En horas, es bastante más.</h2>
+          <p>
+            Si una jornada completa estándar son 40 h/semana, es decir, 2.080 h/año, las guardias convierten
+            la residencia en una formación acelerada a base de noches, festivos y fines de semana.
+          </p>
+        </div>
+
+        <div className="training-grid">
+          <SpotlightPanel className="panel training-card">
+            <span>Residencia de 4 años</span>
+            <strong>{eur(equivalentYearsAt40h(TOTAL_HOURS, 4), 1)} años</strong>
+            <p>equivalentes a 40 h/semana solo con jornada ordinaria y 80 h/mes de guardias.</p>
+            <small>
+              Con 5 h/semana de formación no registrada:{" "}
+              <b>{eur(equivalentYearsAt40h(TRAINING_TOTAL_HOURS, 4), 1)} años</b>.
+            </small>
+          </SpotlightPanel>
+
+          <SpotlightPanel className="panel training-card emphasis">
+            <span>Residencia de 5 años</span>
+            <strong>{eur(equivalentYearsAt40h(TOTAL_HOURS, 5), 1)} años</strong>
+            <p>equivalentes a 40 h/semana antes de contar másteres, congresos, sesiones y postgrado.</p>
+            <small>
+              Con 5 h/semana de formación no registrada:{" "}
+              <b>{eur(equivalentYearsAt40h(TRAINING_TOTAL_HOURS, 5), 1)} años</b>.
+            </small>
+          </SpotlightPanel>
+        </div>
+
+        <SpotlightPanel className="training-note">
+          <BookOpenCheck size={24} />
+          <p>
+            Esto sigue siendo una estimación prudente: no suma másteres, doctorado, cursos obligatorios,
+            competencias, comunicaciones, sesiones clínicas, congresos, publicaciones ni la formación que se
+            hace fuera del horario porque "hay que formarse". A eso lo llaman residencia. En realidad, es
+            hiperformación.
+          </p>
         </SpotlightPanel>
       </RevealSection>
 
