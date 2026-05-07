@@ -516,7 +516,7 @@ function GuardRateMetricCard({ data }) {
         <b>{eur(realNetHour, 2)} €/h netos</b>
       </div>
       <small className="rate-context">
-        Sin guardias: {eur(data.grossNoGuards)} € brutos/mes. Parte bruta atribuida a guardias: {eur(guardGross)} €.
+        Parte bruta atribuida a guardias: {eur(guardGross)} €.
       </small>
     </Motion.div>
   );
