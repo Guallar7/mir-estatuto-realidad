@@ -1136,6 +1136,102 @@ footer strong {
   }
 }
 
+@media (min-width: 1040px) {
+  .hero-metrics {
+    gap: 0.6rem;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    max-width: 1180px;
+  }
+
+  .summary-metric,
+  .summary-metric.hours {
+    grid-column: span 1;
+  }
+
+  .guard-metric {
+    grid-column: span 2;
+  }
+
+  .summary-metric,
+  .rate-metric {
+    border-radius: 12px;
+    min-height: 0;
+    padding: 0.65rem 0.7rem;
+  }
+
+  .rate-metric {
+    align-content: start;
+    column-gap: 0.55rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .summary-metric span {
+    font-size: 0.82rem;
+    line-height: 1.2;
+  }
+
+  .summary-metric small {
+    font-size: 0.74rem;
+  }
+
+  .summary-metric > strong {
+    font-size: clamp(1.9rem, 2.55vw, 2.55rem);
+    margin-top: 0.18rem;
+  }
+
+  .rate-head span {
+    font-size: 0.78rem;
+    line-height: 1.18;
+  }
+
+  .rate-head,
+  .rate-metric > strong,
+  .rate-metric > small {
+    grid-column: 1;
+  }
+
+  .rate-head small {
+    font-size: 0.68rem;
+  }
+
+  .rate-metric > strong {
+    font-size: clamp(2.2rem, 3vw, 2.75rem);
+    margin-top: 0.2rem;
+  }
+
+  .rate-metric > small {
+    font-size: 0.7rem;
+  }
+
+  .rate-breakdown {
+    display: none;
+  }
+
+  .rate-footer {
+    display: flex;
+    gap: 0.3rem;
+    grid-column: 2;
+    grid-row: 1 / 4;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 0;
+    text-align: right;
+  }
+
+  .rate-footer span {
+    font-size: 0.66rem;
+  }
+
+  .rate-footer b {
+    font-size: clamp(1.16rem, 1.5vw, 1.42rem);
+  }
+
+  .rate-context {
+    display: none;
+  }
+}
+
 @media (max-width: 520px) {
   .nav {
     background: rgba(16, 37, 59, 0.92);
