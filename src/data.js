@@ -308,7 +308,7 @@ export const estatutoIssues = [
     title: "Falacia 3: 45 horas semanales resuelven la sobrecarga",
     claim: "La jornada máxima conjunta se fija en 45 h/semana de promedio.",
     answer:
-      "El promedio cuatrimestral puede ocultar picos de sobrecarga. Además, el propio texto permite superar la duración máxima conjunta si hay razones organizativas o asistenciales, con consentimiento individual escrito y hasta 150 horas/año adicionales. Sobre el papel no es un cheque en blanco; en un sistema con déficit estructural, esa excepción es exactamente donde se juega la realidad.",
+      "El promedio cuatrimestral puede ocultar picos de sobrecarga. Además, el propio texto permite superar la duración máxima conjunta si hay razones organizativas o asistenciales, con consentimiento individual escrito y hasta 150 horas/año adicionales. La pregunta que no responde es la decisiva: si nadie acepta superar ese límite, ¿se contratan médicos o se vuelve a cargar el sistema sobre los mismos? Las guardias por encima de la jornada ordinaria deben ser voluntarias, justamente retribuidas y computables para jubilación; si no, la obligatoriedad sigue incrustada en la profesión médica.",
     refs: ["Anteproyecto arts. 84, 97 y 98", "SIMEG 2026"],
   },
   {

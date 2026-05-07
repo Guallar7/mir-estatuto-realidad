@@ -136,11 +136,9 @@ function App() {
           </div>
         </div>
 
-        <div className="hero-metrics" aria-label="Resumen principal">
-          <MetricCard label={`${current.year} medio sin guardias`} value={`${eur(current.grossNoGuards)} €`} detail="brutos/mes" />
-          <MetricCard label={`${current.year} con 80 h de guardia`} value={`${eur(current.netWithGuards)} €`} detail="netos/mes" tone="red" />
-          <MetricCard label="Horas reales mínimas" value={`${eur(TOTAL_HOURS, 1)} h`} detail="al mes" tone="amber" />
-          <MetricCard label={`${current.year} precio real medio`} value={`${eur(current.realNetHour, 2)} €`} detail="netos/h" tone="green" />
+        <div className="hero-metrics" aria-label="Comparación R1 y R5 con guardias">
+          <RateMetricCard data={summaryByYear[0]} />
+          <RateMetricCard data={summaryByYear[4]} />
         </div>
       </section>
 
@@ -449,18 +447,36 @@ function App() {
   );
 }
 
-function MetricCard({ label, value, detail, tone = "green" }) {
+function RateMetricCard({ data }) {
   const reduceMotion = useReducedMotion();
+  const guardGross = data.grossWithGuards - data.grossNoGuards;
 
   return (
     <Motion.div
-      className={`metric ${tone}`}
+      className="rate-metric"
       whileHover={reduceMotion ? undefined : { y: -4, scale: 1.01 }}
       transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 20 }}
     >
-      <span>{label}</span>
-      <strong>{value}</strong>
-      <small>{detail}</small>
+      <div className="rate-head">
+        <span>{data.year} con 80 h de guardia</span>
+        <small>media nacional SIMEG/CTO</small>
+      </div>
+      <strong>{eur(data.netWithGuards)} €</strong>
+      <small>netos/mes</small>
+      <div className="rate-breakdown">
+        <span>{eur(ORDINARY_HOURS, 1)} h ordinarias</span>
+        <span>+ {GUARD_HOURS} h guardias</span>
+        <b>= {eur(TOTAL_HOURS, 1)} h/mes</b>
+      </div>
+      <div className="rate-footer">
+        <span>
+          {eur(data.netWithGuards)} € / {eur(TOTAL_HOURS, 1)} h
+        </span>
+        <b>{eur(data.realNetHour, 2)} €/h netos</b>
+      </div>
+      <small className="rate-context">
+        Sin guardias: {eur(data.grossNoGuards)} € brutos/mes. Parte bruta atribuida a guardias: {eur(guardGross)} €.
+      </small>
     </Motion.div>
   );
 }
