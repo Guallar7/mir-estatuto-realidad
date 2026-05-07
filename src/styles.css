@@ -602,13 +602,25 @@ h2 {
   margin: 1rem 0 0.2rem;
 }
 
-.result-card strong {
+.result-card .result-amount {
   display: block;
   font-size: clamp(2.6rem, 13vw, 5.5rem);
   line-height: 0.95;
 }
 
-.result-card span {
+.result-card .result-amount span,
+.result-card .result-amount small {
+  display: block;
+}
+
+.result-card .result-amount small {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(1.2rem, 4.5vw, 2rem);
+  line-height: 1.05;
+  margin-top: 0.25rem;
+}
+
+.result-card > span {
   color: rgba(255, 255, 255, 0.86);
   font-size: 1.05rem;
 }
@@ -1205,7 +1217,21 @@ footer strong {
   }
 
   .rate-breakdown {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.22rem;
+    grid-column: 1 / -1;
+    margin-top: 0.42rem;
+    padding-top: 0.4rem;
+  }
+
+  .rate-breakdown span,
+  .rate-breakdown b {
+    border-radius: 7px;
+    flex: 1 1 30%;
+    font-size: 0.64rem;
+    padding: 0.2rem 0.28rem;
+    text-align: center;
   }
 
   .rate-footer {
@@ -1228,7 +1254,40 @@ footer strong {
   }
 
   .rate-context {
-    display: none;
+    display: block;
+    font-size: 0.66rem;
+    grid-column: 1 / -1;
+    margin-top: 0.38rem;
+    padding-top: 0.36rem;
+  }
+
+  .result-card {
+    min-height: 0;
+    padding: 1rem;
+  }
+
+  .result-card svg {
+    height: 26px;
+    width: 26px;
+  }
+
+  .result-card p {
+    font-size: 0.95rem;
+    margin-top: 0.65rem;
+  }
+
+  .result-card .result-amount {
+    font-size: clamp(3rem, 5vw, 4.2rem);
+    line-height: 0.92;
+  }
+
+  .result-card .result-amount small {
+    font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+    line-height: 1.05;
+  }
+
+  .result-card > span {
+    font-size: 0.95rem;
   }
 }
 

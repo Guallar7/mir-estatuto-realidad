@@ -216,7 +216,10 @@ function App() {
           <SpotlightPanel className="panel result-card">
             <BadgeEuro size={32} />
             <p>Media {current.year} con el escenario del cartel</p>
-            <strong>{eur(current.netWithGuards)} € netos/mes</strong>
+            <strong className="result-amount">
+              <span>{eur(current.netWithGuards)} €</span>
+              <small>netos/mes</small>
+            </strong>
             <span>
               equivale a{" "}
               <b>{eur(currentHourly, 2)} €/h netos</b>
