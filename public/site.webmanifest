@@ -1,13 +1,33 @@
 {
-  "name": "MIR: no es sueldo, son guardias",
-  "short_name": "MIR Guardias",
-  "description": "Datos reales sobre retribuciones MIR, guardias, horas trabajadas y Estatuto Marco sanitario.",
+  "name": "Estatuto Médico Propio",
+  "short_name": "Estatuto Médico",
+  "description": "Datos, fuentes y argumentos sobre el anteproyecto del Estatuto Marco, guardias médicas, MIR, conciliación y derechos laborales médicos.",
   "lang": "es",
   "start_url": "/mir-estatuto-realidad/",
   "scope": "/mir-estatuto-realidad/",
   "display": "standalone",
   "background_color": "#10253b",
   "theme_color": "#10253b",
+  "shortcuts": [
+    {
+      "name": "Anteproyecto",
+      "short_name": "Anteproyecto",
+      "url": "/mir-estatuto-realidad/anteproyecto.html",
+      "description": "Análisis del anteproyecto del Estatuto Marco"
+    },
+    {
+      "name": "Reivindicaciones",
+      "short_name": "Programa",
+      "url": "/mir-estatuto-realidad/reivindicaciones.html",
+      "description": "Programa por un Estatuto Médico y Facultativo propio"
+    },
+    {
+      "name": "MIR",
+      "short_name": "MIR",
+      "url": "/mir-estatuto-realidad/mir.html",
+      "description": "Datos MIR sobre sueldo, guardias y horas reales"
+    }
+  ],
   "icons": [
     {
       "src": "/mir-estatuto-realidad/favicon.svg",

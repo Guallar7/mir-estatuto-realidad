@@ -1,10 +1,31 @@
-# MIR: no es sueldo, son guardias
+# Estatuto Médico Propio
 
-Web divulgativa mobile-first para explicar con datos reales las retribuciones MIR en España, el peso de las guardias y las razones de oposición médica al anteproyecto de Estatuto Marco.
+Portal documental y argumental para defender un Estatuto Médico y Facultativo propio frente al anteproyecto del nuevo Estatuto Marco. Reúne datos, fuentes, desmontajes de noticias, reivindicaciones y material descargable sobre guardias médicas, MIR, jornada, conciliación, responsabilidad clínica, jubilación y derechos laborales.
+
+Frase guía:
+
+> No pedimos decidir por nadie. Pedimos que nadie decida por nosotros.
+
+El bloque MIR se mantiene como una sección específica: sirve para demostrar cómo se manipula el debate cuando se mezclan sueldo ordinario, guardias y horas reales. Ya no es la identidad completa de la web.
 
 - Web publicada: https://guallar7.github.io/mir-estatuto-realidad/
 - Repositorio: https://github.com/Guallar7/mir-estatuto-realidad
 - Última revisión documental del índice: 7 de mayo de 2026.
+
+## Estructura De La Web
+
+La web está organizada como portal multipágina estático con React + Vite, sin router ni backend:
+
+- `/`: portada breve y directorio central.
+- `/reivindicaciones.html`: programa médico-facultativo por un Estatuto propio.
+- `/anteproyecto.html`: matriz de desmontaje del anteproyecto del Estatuto Marco.
+- `/mir.html`: sueldo ordinario, guardias, horas reales, CCAA y salario por hora.
+- `/noticias.html`: respuesta a titulares, comunicados y declaraciones públicas.
+- `/fuentes.html`: normativa, comunicados, prensa, tablas, descargas y documentos de verificación.
+- `/argumentario.html`: frases y respuestas reutilizables para redes, asambleas y prensa.
+- `/infografia.html`: pieza visual específica del bloque MIR.
+
+Cada HTML tiene metadatos SEO propios y monta `src/main.jsx` con `data-page`, salvo la infografía, que conserva `src/infografia.jsx`.
 
 ## Índice De Fuentes Y Contexto
 
@@ -69,18 +90,28 @@ Nota metodológica: el cálculo comunicativo principal usa 35 h/semana anualizad
 | CESM-CV - Líneas rojas del Estatuto Marco | https://www.cesm-cv.org/reclasificacion-profesional-jornada-laboral-y-regimen-de-incompatibilidades-lineas-rojas-del-borrador-de-estatuto-marco/ | Contexto autonómico sobre reclasificación, jornada e incompatibilidades. |
 | Metges de Catalunya - Preacuerdo y huelga facultativa | https://metgesdecatalunya.cat/es/actualidad/noticias/el-preacuerdo-entre-sanidad-y-los-sindicatos-del-ambito-de-negociacion-para-renovar-el-estatuto-marco-no-suspende-la-huelga-de-facultativos | Contexto de oposición médica en Cataluña. |
 
-### 6. Datos Y Documentos Derivados Del Proyecto
+### 6. Descargas Generales
 
 | Documento | Ruta | Uso |
 |---|---|---|
-| Datos estructurados de la web | [src/data.js](src/data.js) | Fuente interna de cifras, filas CCAA, falacias y enlaces que alimentan la interfaz. |
-| Utilidades de cálculo | [src/utils.js](src/utils.js) | Formateo y cálculo usado por la web. |
-| Dossier Markdown | [public/downloads/dossier_mir_estatuto_marco.md](public/downloads/dossier_mir_estatuto_marco.md) | Dossier narrativo descargable actualizado con denominador de 35 h/semana anualizadas. |
-| Dossier DOCX | [public/downloads/dossier_mir_estatuto_marco.docx](public/downloads/dossier_mir_estatuto_marco.docx) | Versión editable del dossier actualizada con denominador de 35 h/semana anualizadas. |
-| Argumentario rápido | [public/downloads/argumentario_rapido_csif_mir.md](public/downloads/argumentario_rapido_csif_mir.md) | Resumen para redes/asamblea actualizado con denominador de 35 h/semana anualizadas. |
+| Dossier Estatuto Médico Propio | [public/downloads/dossier_estatuto_medico_propio.md](public/downloads/dossier_estatuto_medico_propio.md) | Documento general de tesis, reivindicaciones y método de análisis del anteproyecto. |
+| Matriz anteproyecto | [public/downloads/matriz_anteproyecto_estatuto_medico.md](public/downloads/matriz_anteproyecto_estatuto_medico.md) | Resumen por referencia, efecto práctico, riesgo, colectivos afectados, verificación y demanda. |
+| Argumentario Estatuto Médico | [public/downloads/argumentario_estatuto_medico.md](public/downloads/argumentario_estatuto_medico.md) | Frases y respuestas breves para redes, asambleas y prensa. |
+| Respuesta noticia Estatuto Marco | [public/downloads/respuesta_noticia_estatuto_marco.md](public/downloads/respuesta_noticia_estatuto_marco.md) | Respuesta base a titulares sobre acuerdo sindical, guardias, conciliación y consenso médico. |
+
+### 7. Anexos MIR/CSIF Y Datos Reutilizables
+
+| Documento | Ruta | Uso |
+|---|---|---|
+| Dossier MIR/CSIF Markdown | [public/downloads/dossier_mir_estatuto_marco.md](public/downloads/dossier_mir_estatuto_marco.md) | Anexo específico para rebatir tablas de sueldos MIR que mezclan salario y guardias. |
+| Dossier MIR/CSIF DOCX | [public/downloads/dossier_mir_estatuto_marco.docx](public/downloads/dossier_mir_estatuto_marco.docx) | Versión editable del anexo MIR/CSIF. |
+| Argumentario MIR/CSIF | [public/downloads/argumentario_rapido_csif_mir.md](public/downloads/argumentario_rapido_csif_mir.md) | Resumen táctico para responder a cifras MIR con guardias. |
+| Escenarios MIR guardias | [public/downloads/escenarios_mir_guardias.md](public/downloads/escenarios_mir_guardias.md) | Estimaciones brutas 3-6 guardias para explicar sensibilidad de horas y salario por hora. |
 | Excel de retribuciones | [public/downloads/retribuciones_mir_2026.xlsx](public/downloads/retribuciones_mir_2026.xlsx) | Tabla de trabajo para análisis y visualizaciones. |
 | CSV de retribuciones | [public/downloads/datos_retribuciones_mir_2026.csv](public/downloads/datos_retribuciones_mir_2026.csv) | Datos tabulares reutilizables. |
-| Checklist de comparación del Estatuto | [docs/checklist-comparacion-estatuto-medicos.md](docs/checklist-comparacion-estatuto-medicos.md) | Guía exhaustiva para comparar anteproyecto y condiciones actuales. |
+| Datos estructurados de la web | [src/data.js](src/data.js) | Fuente estructurada de cifras, filas CCAA, matriz del anteproyecto, reivindicaciones y enlaces. |
+| Utilidades de cálculo | [src/utils.js](src/utils.js) | Formateo y cálculo usado por la web. |
+| Checklist operativo de comparación | [docs/checklist-comparacion-estatuto-medicos.md](docs/checklist-comparacion-estatuto-medicos.md) | Documento de verificación para contrastar anteproyecto, datos pendientes y condiciones actuales. |
 
 ## Desarrollo
 
@@ -89,10 +120,18 @@ npm install
 npm run dev
 ```
 
-## Build
+## Validación Y Build
 
 ```bash
+npm run validate:data
+npm run lint
 npm run build
+```
+
+También puede ejecutarse todo junto:
+
+```bash
+npm run check
 ```
 
 La publicación en GitHub Pages se realiza con GitHub Actions desde la rama `main`.
